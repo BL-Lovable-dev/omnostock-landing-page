@@ -1,4 +1,3 @@
-
 import { Instagram } from 'lucide-react';
 
 const Footer = () => {

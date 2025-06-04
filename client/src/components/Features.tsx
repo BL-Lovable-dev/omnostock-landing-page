@@ -10,38 +10,38 @@ const Features = () => {
   const features = [
     {
       icon: BarChart3,
-      title: "Smart Insights",
-      description: "Get the data you need to make informed decisions.",
+      title: "Inventory Intelligence",
+      description: "Revolutionary approach to stock visibility and forecasting.",
       color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Globe,
-      title: "Built to Scale",
-      description: "Designed to grow with your business needs.",
+      title: "Global Operations",
+      description: "Seamlessly manage inventory across multiple locations worldwide.",
       color: "from-emerald-500 to-teal-500"
     },
     {
       icon: Shield,
-      title: "Secure & Reliable",
-      description: "Your data is protected with industry-standard security.",
+      title: "Enterprise Security",
+      description: "Bank-grade protection for your most critical inventory data.",
       color: "from-violet-500 to-purple-500"
     },
     {
       icon: Zap,
-      title: "Lightning Fast",
-      description: "Optimized for speed and efficiency.",
+      title: "Real-Time Sync",
+      description: "Instant updates across all your inventory touchpoints.",
       color: "from-amber-500 to-orange-500"
     },
     {
       icon: Users,
-      title: "Team Collaboration",
-      description: "Work seamlessly with your team members.",
+      title: "Operator-First Design",
+      description: "Built by operators, for operators who demand excellence.",
       color: "from-rose-500 to-pink-500"
     },
     {
       icon: TrendingUp,
-      title: "Modern Technology",
-      description: "Built with cutting-edge tools and best practices.",
+      title: "Next-Gen Platform",
+      description: "The future of inventory management is here.",
       color: "from-indigo-500 to-blue-500"
     }
   ];
@@ -65,14 +65,14 @@ const Features = () => {
           </div>
           
           <h2 className="text-4xl lg:text-6xl font-black mb-6 tracking-tight">
-            <span className="gradient-text">Features Built for</span>
+            <span className="gradient-text">Built for</span>
             <br />
-            <span className="text-slate-900 dark:text-white">Modern Operations</span>
+            <span className="text-slate-900 dark:text-white">Modern Operators</span>
           </h2>
           
           <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Every feature is designed with one goal: making inventory management 
-            <span className="gradient-text-accent font-semibold"> effortless and powerful</span>.
+            A glimpse into what's coming: inventory management that's 
+            <span className="gradient-text-accent font-semibold"> intuitive, powerful, and transformative</span>.
           </p>
         </div>
 
