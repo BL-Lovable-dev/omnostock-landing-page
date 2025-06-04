@@ -1,12 +1,10 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { MailchimpService } from "./services/mailchimp";
 import { insertWaitlistSubscriberSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  const mailchimpService = new MailchimpService();
 
   // Waitlist subscription endpoint
   app.post("/api/waitlist/subscribe", async (req, res) => {
@@ -38,8 +36,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
           email
         });
       }
-
-      // Mailchimp handles autoresponder emails automatically
 
       res.status(201).json({
         success: true,
@@ -154,23 +150,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Mailchimp connection test endpoint
-  app.get("/api/waitlist/test-connection", async (req, res) => {
+  // Database status endpoint
+  app.get("/api/waitlist/status", async (req, res) => {
     try {
-      const isConnected = await mailchimpService.testConnection();
-
+      const subscribers = await storage.getAllWaitlistSubscribers();
+      
       res.json({
         success: true,
-        connected: isConnected,
-        message: isConnected ? "Mailchimp connection successful" : "Mailchimp connection failed"
+        total: subscribers.length,
+        active: subscribers.filter(s => s.isActive).length
       });
 
     } catch (error) {
-      console.error("Mailchimp connection test error:", error);
+      console.error("Database status error:", error);
       res.status(500).json({
         success: false,
-        connected: false,
-        message: "Failed to test Mailchimp connection"
+        message: "Failed to get waitlist status"
       });
     }
   });
