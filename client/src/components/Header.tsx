@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,19 +42,20 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-6 animate-fade-in-delay">
             <button 
               onClick={() => scrollToSection('mission')}
-              className="text-slate-600 hover:text-slate-900 transition-all duration-200 text-sm font-medium hover-lift"
+              className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all duration-200 text-sm font-medium hover-lift"
             >
               Mission
             </button>
             <button 
               onClick={() => scrollToSection('faq')}
-              className="text-slate-600 hover:text-slate-900 transition-all duration-200 text-sm font-medium hover-lift"
+              className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all duration-200 text-sm font-medium hover-lift"
             >
               FAQ
             </button>
+            <ThemeToggle />
             <button 
               onClick={() => scrollToSection('waitlist')}
-              className="px-4 py-2 rounded-lg bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition-all duration-200 hover-lift hover-glow"
+              className="px-4 py-2 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-sm font-medium hover:bg-slate-800 dark:hover:bg-slate-100 transition-all duration-200 hover-lift hover-glow"
             >
               Early Access
             </button>
@@ -77,7 +79,7 @@ const Header = () => {
                   scrollToSection('mission');
                   setIsMobileMenuOpen(false);
                 }}
-                className="block w-full text-left text-slate-600 hover:text-slate-900 py-2 transition-colors duration-200"
+                className="block w-full text-left text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white py-2 transition-colors duration-200"
               >
                 Mission
               </button>
@@ -86,16 +88,19 @@ const Header = () => {
                   scrollToSection('faq');
                   setIsMobileMenuOpen(false);
                 }}
-                className="block w-full text-left text-slate-600 hover:text-slate-900 py-2 transition-colors duration-200"
+                className="block w-full text-left text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white py-2 transition-colors duration-200"
               >
                 FAQ
               </button>
+              <div className="flex justify-center py-2">
+                <ThemeToggle />
+              </div>
               <button 
                 onClick={() => {
                   scrollToSection('waitlist');
                   setIsMobileMenuOpen(false);
                 }}
-                className="block w-full px-4 py-2 rounded-lg bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition-all duration-200 text-center"
+                className="block w-full px-4 py-2 rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-sm font-medium hover:bg-slate-800 dark:hover:bg-slate-100 transition-all duration-200 text-center"
               >
                 Early Access
               </button>

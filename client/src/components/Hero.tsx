@@ -4,12 +4,17 @@ import { ArrowRight, Mail, Check, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { useParallax } from '@/hooks/useParallax';
 
 const Hero = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const { toast } = useToast();
+  
+  const parallaxRef1 = useParallax(0.3);
+  const parallaxRef2 = useParallax(-0.2);
+  const parallaxRef3 = useParallax(0.5);
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,13 +40,13 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100">
-      {/* Enhanced ambient background elements */}
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      {/* Enhanced ambient background elements with parallax */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Primary floating elements */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-indigo-100/40 to-purple-100/40 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-br from-slate-100/60 to-gray-100/60 rounded-full blur-3xl animate-float-delayed"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-50/30 to-indigo-50/30 rounded-full blur-3xl animate-pulse-soft"></div>
+        {/* Primary floating elements with parallax */}
+        <div ref={parallaxRef1} className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-indigo-100/40 to-purple-100/40 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-full blur-3xl animate-float"></div>
+        <div ref={parallaxRef2} className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-br from-slate-100/60 to-gray-100/60 dark:from-slate-700/40 dark:to-gray-700/40 rounded-full blur-3xl animate-float-delayed"></div>
+        <div ref={parallaxRef3} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-50/30 to-indigo-50/30 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-full blur-3xl animate-pulse-soft"></div>
         
         {/* Floating particles */}
         {Array.from({ length: 8 }).map((_, i) => (

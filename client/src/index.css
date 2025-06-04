@@ -46,7 +46,7 @@
   }
 
   .dark {
-    --background: 3 7 18;
+    --background: 2 8 23;
     --foreground: 248 250 252;
 
     --card: 15 23 42;
@@ -103,23 +103,23 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-slate-100 dark:via-slate-300 dark:to-slate-100 bg-clip-text text-transparent;
     background-size: 200% 200%;
     animation: gradient-shift 8s ease-in-out infinite;
   }
 
   .gradient-text-accent {
-    @apply bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 dark:from-indigo-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent;
     background-size: 200% 200%;
     animation: gradient-shift 6s ease-in-out infinite;
   }
 
   .glass-effect {
-    @apply backdrop-blur-sm bg-white/80 border border-white/20;
+    @apply backdrop-blur-sm bg-white/80 dark:bg-slate-800/80 border border-white/20 dark:border-slate-700/30;
   }
 
   .glass-effect-strong {
-    @apply backdrop-blur-md bg-white/90 border border-white/30;
+    @apply backdrop-blur-md bg-white/90 dark:bg-slate-800/90 border border-white/30 dark:border-slate-700/40;
   }
 
   .hover-lift {
@@ -182,11 +182,11 @@
   }
 
   .trust-indicator {
-    @apply px-3 py-1 rounded-full bg-white/80 backdrop-blur-sm border border-slate-200 text-slate-600 text-xs font-medium transition-all duration-300 hover:bg-white hover:scale-105 hover:shadow-lg;
+    @apply px-3 py-1 rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium transition-all duration-300 hover:bg-white dark:hover:bg-slate-700 hover:scale-105 hover:shadow-lg;
   }
 
   .feature-card {
-    @apply bg-white/60 backdrop-blur-md border border-white/40 rounded-2xl p-6 transition-all duration-300 hover:bg-white/80 hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/10;
+    @apply bg-white/60 dark:bg-slate-800/60 backdrop-blur-md border border-white/40 dark:border-slate-700/40 rounded-2xl p-6 transition-all duration-300 hover:bg-white/80 dark:hover:bg-slate-800/80 hover:shadow-xl hover:shadow-indigo-500/10 dark:hover:shadow-indigo-400/10 relative overflow-hidden;
   }
 
   .btn-primary::before {
@@ -213,6 +213,46 @@
   .trust-indicator::before {
     content: '';
     @apply w-2 h-2 rounded-full bg-green-500 animate-pulse-soft;
+  }
+
+  /* Advanced micro-interactions */
+  .morph-button {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .morph-button::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 transition-opacity duration-300;
+  }
+
+  .morph-button:hover::before {
+    @apply opacity-10;
+  }
+
+  /* Enhanced scroll indicators */
+  .scroll-indicator {
+    @apply fixed top-0 left-0 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 z-50 transition-all duration-200;
+  }
+
+  /* Tooltip animations */
+  .tooltip-enter {
+    @apply opacity-0 scale-95 translate-y-1;
+  }
+
+  .tooltip-enter-active {
+    @apply opacity-100 scale-100 translate-y-0 transition-all duration-200;
+  }
+
+  /* Loading states */
+  .skeleton {
+    @apply bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 animate-pulse;
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Focus states for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-white dark:focus:ring-offset-slate-900;
   }
 }
 
