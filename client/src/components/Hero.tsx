@@ -4,14 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useParallax } from '@/hooks/useParallax';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiRequest } from '@/lib/queryClient';
+import { supabase } from '@/lib/supabase';
 
 const Hero = () => {
   const [email, setEmail] = useState('');
   const [isValid, setIsValid] = useState(false);
   const { toast } = useToast();
-  const queryClient = useQueryClient();
+  const [isLoading, setIsLoading] = useState(false);
 
   const parallaxRef1 = useParallax(0.3);
   const parallaxRef2 = useParallax(-0.2);
@@ -22,31 +21,68 @@ const Hero = () => {
     setIsValid(emailRegex.test(email));
   }, [email]);
 
-  const subscribeToWaitlist = useMutation({
-    mutationFn: async (email: string) => {
-      return apiRequest('/api/waitlist/subscribe', {
-        method: 'POST',
-        body: JSON.stringify({ email }),
-      });
-    },
-    onSuccess: (data) => {
+  const subscribeToWaitlist = async (email: string) => {
+    setIsLoading(true);
+    try {
+      // Check if email already exists
+      const { data: existingSubscriber } = await supabase
+        .from('waitlist_subscribers')
+        .select('id, is_active')
+        .eq('email', email)
+        .single();
+
+      if (existingSubscriber && existingSubscriber.is_active) {
+        toast({
+          title: "Already subscribed!",
+          description: "You're already on our waitlist!",
+        });
+        return;
+      }
+
+      // Insert or update subscriber
+      if (existingSubscriber) {
+        // Reactivate existing subscriber
+        const { error } = await supabase
+          .from('waitlist_subscribers')
+          .update({ is_active: true, subscribed_at: new Date().toISOString() })
+          .eq('email', email);
+
+        if (error) throw error;
+      } else {
+        // Insert new subscriber
+        const { error } = await supabase
+          .from('waitlist_subscribers')
+          .insert([{ email, is_active: true }]);
+
+        if (error) throw error;
+      }
+
+      // Call edge function to send welcome email
+      try {
+        await supabase.functions.invoke('send-welcome-email', {
+          body: { email }
+        });
+      } catch (emailError) {
+        console.warn('Email sending failed:', emailError);
+      }
+
       toast({
         title: "You're on the list!",
         description: "We'll notify you when OmnoStock launches with early access.",
       });
       setEmail('');
-      // Invalidate any waitlist-related queries
-      queryClient.invalidateQueries({ queryKey: ['waitlist'] });
-    },
-    onError: (error: any) => {
+      
+    } catch (error: any) {
       const errorMessage = error.message || "Failed to join waitlist. Please try again.";
       toast({
         title: "Subscription failed",
         description: errorMessage,
         variant: "destructive",
       });
-    },
-  });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
