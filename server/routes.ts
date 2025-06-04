@@ -2,13 +2,11 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { MailchimpService } from "./services/mailchimp";
-import { EmailService } from "./services/email";
 import { insertWaitlistSubscriberSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   const mailchimpService = new MailchimpService();
-  const emailService = new EmailService();
 
   // Waitlist subscription endpoint
   app.post("/api/waitlist/subscribe", async (req, res) => {
@@ -46,10 +44,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Send welcome email (don't block the response if it fails)
-      emailService.sendWelcomeEmail(email).catch(error => {
-        console.error('Failed to send welcome email:', error);
-      });
+      // Mailchimp handles autoresponder emails automatically
 
       res.status(201).json({
         success: true,
@@ -170,26 +165,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Email service test endpoint
-  app.get("/api/waitlist/test-email", async (req, res) => {
-    try {
-      const isConnected = await emailService.testConnection();
 
-      res.json({
-        success: true,
-        connected: isConnected,
-        message: isConnected ? "Email service connection successful" : "Email service connection failed"
-      });
-
-    } catch (error) {
-      console.error("Email service connection test error:", error);
-      res.status(500).json({
-        success: false,
-        connected: false,
-        message: "Failed to test email service connection"
-      });
-    }
-  });
 
   const httpServer = createServer(app);
 

@@ -61,14 +61,16 @@ export class MailchimpService {
     return response.json();
   }
 
-  async addSubscriber(email: string, tags: string[] = ['waitlist']): Promise<MailchimpResponse> {
+  async addSubscriber(email: string, tags: string[] = ['waitlist'], enableAutoresponder: boolean = true): Promise<MailchimpResponse> {
     const memberData: MailchimpMember = {
       email_address: email,
-      status: 'subscribed',
+      status: enableAutoresponder ? 'subscribed' : 'pending',
       tags: tags,
       merge_fields: {
         SOURCE: 'website_waitlist',
-        SIGNUP_DATE: new Date().toISOString().split('T')[0]
+        SIGNUP_DATE: new Date().toISOString().split('T')[0],
+        FNAME: '',
+        LNAME: ''
       }
     };
 
@@ -81,8 +83,8 @@ export class MailchimpService {
       );
       return response;
     } catch (error: any) {
-      // If member already exists, update their subscription
-      if (error.message.includes('400')) {
+      // Handle different error cases
+      if (error.message.includes('Member Exists')) {
         const subscriberHash = this.getSubscriberHash(email);
         const updateData = {
           email_address: email,
@@ -97,7 +99,9 @@ export class MailchimpService {
         );
         return response;
       }
-      throw error;
+      
+      // Re-throw with more specific error message
+      throw new Error(`Mailchimp subscription failed: ${error.message}`);
     }
   }
 
