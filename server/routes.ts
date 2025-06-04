@@ -29,7 +29,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Add to Mailchimp
       const mailchimpResponse = await mailchimpService.addSubscriber(email, ['waitlist']);
-      
+
       // Store in database
       let subscriber;
       if (existingSubscriber) {
@@ -63,7 +63,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     } catch (error: any) {
       console.error("Waitlist subscription error:", error);
-      
+
       if (error instanceof z.ZodError) {
         return res.status(400).json({
           success: false,
@@ -90,7 +90,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/waitlist/status/:email", async (req, res) => {
     try {
       const { email } = req.params;
-      
+
       if (!email || !z.string().email().safeParse(email).success) {
         return res.status(400).json({
           success: false,
@@ -99,7 +99,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const subscriber = await storage.getWaitlistSubscriberByEmail(email);
-      
+
       if (!subscriber || !subscriber.isActive) {
         return res.status(404).json({
           success: false,
@@ -129,7 +129,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/waitlist/subscribers", async (req, res) => {
     try {
       const subscribers = await storage.getAllWaitlistSubscribers();
-      
+
       res.json({
         success: true,
         count: subscribers.length,
@@ -153,7 +153,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/waitlist/test-connection", async (req, res) => {
     try {
       const isConnected = await mailchimpService.testConnection();
-      
+
       res.json({
         success: true,
         connected: isConnected,
@@ -174,7 +174,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/waitlist/test-email", async (req, res) => {
     try {
       const isConnected = await emailService.testConnection();
-      
+
       res.json({
         success: true,
         connected: isConnected,
