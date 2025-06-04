@@ -61,40 +61,23 @@ export class MailchimpService {
     return response.json();
   }
 
-  async addSubscriber(email: string, tags: string[] = ['waitlist'], enableAutoresponder: boolean = true): Promise<MailchimpResponse> {
+  async addSubscriber(email: string, tags: string[] = [], enableAutoresponder: boolean = true): Promise<MailchimpResponse> {
+    const subscriberHash = this.getSubscriberHash(email);
+    
+    // Always use PUT to handle both new and existing members
     const memberData: MailchimpMember = {
       email_address: email,
-      status: enableAutoresponder ? 'subscribed' : 'pending',
-      tags: tags
+      status: 'subscribed'
     };
 
     try {
-      // Try to add new member
       const response = await this.makeRequest(
-        `/lists/${this.audienceId}/members`,
-        'POST',
+        `/lists/${this.audienceId}/members/${subscriberHash}`,
+        'PUT',
         memberData
       );
       return response;
     } catch (error: any) {
-      // Handle different error cases
-      if (error.message.includes('already a list member') || error.message.includes('Member Exists')) {
-        const subscriberHash = this.getSubscriberHash(email);
-        const updateData = {
-          email_address: email,
-          status: 'subscribed',
-          merge_fields: memberData.merge_fields
-        };
-        
-        const response = await this.makeRequest(
-          `/lists/${this.audienceId}/members/${subscriberHash}`,
-          'PUT',
-          updateData
-        );
-        return response;
-      }
-      
-      // Re-throw with more specific error message
       throw new Error(`Mailchimp subscription failed: ${error.message}`);
     }
   }

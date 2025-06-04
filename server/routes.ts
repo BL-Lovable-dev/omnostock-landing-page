@@ -26,30 +26,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Add to Mailchimp
-      let mailchimpResponse;
-      try {
-        mailchimpResponse = await mailchimpService.addSubscriber(email, ['waitlist']);
-      } catch (mailchimpError: any) {
-        // Handle member already exists case specifically
-        if (mailchimpError.message.includes('already a list member')) {
-          // Try to update existing member
-          const subscriberHash = require('crypto').createHash('md5').update(email.toLowerCase()).digest('hex');
-          mailchimpResponse = await mailchimpService.makeRequest(
-            `/lists/1b86154260/members/${subscriberHash}`,
-            'PUT',
-            {
-              email_address: email,
-              status: 'subscribed',
-              merge_fields: {
-                SOURCE: 'website_waitlist',
-                SIGNUP_DATE: new Date().toISOString().split('T')[0]
-              }
-            }
-          );
-        } else {
-          throw mailchimpError;
-        }
-      }
+      const mailchimpResponse = await mailchimpService.addSubscriber(email);
 
       // Store in database
       let subscriber;
