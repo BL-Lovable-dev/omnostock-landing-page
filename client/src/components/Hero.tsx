@@ -57,14 +57,8 @@ const Hero = () => {
         if (error) throw error;
       }
 
-      // Call edge function to send welcome email
-      try {
-        await supabase.functions.invoke('send-welcome-email', {
-          body: { email }
-        });
-      } catch (emailError) {
-        console.warn('Email sending failed:', emailError);
-      }
+      // Note: Email sending will be handled via Netlify form or external service
+      console.log('Subscriber added successfully:', email);
 
       toast({
         title: "You're on the list!",
@@ -86,9 +80,9 @@ const Hero = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !isValid || subscribeToWaitlist.isPending) return;
+    if (!email || !isValid || isLoading) return;
 
-    subscribeToWaitlist.mutate(email);
+    await subscribeToWaitlist(email);
   };
 
   return (
@@ -180,10 +174,10 @@ const Hero = () => {
 
             <Button 
               type="submit" 
-              disabled={subscribeToWaitlist.isPending || !isValid || !email}
+              disabled={isLoading || !isValid || !email}
               className="w-full h-12 px-6 btn-primary group"
             >
-              {subscribeToWaitlist.isPending ? (
+              {isLoading ? (
                 <div className="flex items-center gap-2">
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   <span>Joining...</span>
