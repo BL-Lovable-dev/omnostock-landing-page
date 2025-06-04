@@ -35,7 +35,7 @@ export class MailchimpService {
     return crypto.createHash('md5').update(email.toLowerCase()).digest('hex');
   }
 
-  private async makeRequest(endpoint: string, method: string = 'GET', data?: any): Promise<any> {
+  async makeRequest(endpoint: string, method: string = 'GET', data?: any): Promise<any> {
     const url = `${this.baseUrl}${endpoint}`;
     const headers = {
       'Authorization': `Basic ${Buffer.from(`anystring:${this.apiKey}`).toString('base64')}`,
@@ -65,13 +65,7 @@ export class MailchimpService {
     const memberData: MailchimpMember = {
       email_address: email,
       status: enableAutoresponder ? 'subscribed' : 'pending',
-      tags: tags,
-      merge_fields: {
-        SOURCE: 'website_waitlist',
-        SIGNUP_DATE: new Date().toISOString().split('T')[0],
-        FNAME: '',
-        LNAME: ''
-      }
+      tags: tags
     };
 
     try {
@@ -84,7 +78,7 @@ export class MailchimpService {
       return response;
     } catch (error: any) {
       // Handle different error cases
-      if (error.message.includes('Member Exists')) {
+      if (error.message.includes('already a list member') || error.message.includes('Member Exists')) {
         const subscriberHash = this.getSubscriberHash(email);
         const updateData = {
           email_address: email,
