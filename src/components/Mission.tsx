@@ -1,59 +1,117 @@
 
+import { useEffect, useRef } from 'react';
+
 const Mission = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll('.section-fade-in');
+    elements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="mission" className="py-24 lg:py-32 bg-white">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-            Why We Exist
+    <section ref={sectionRef} id="mission" className="py-24 lg:py-32 bg-white">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="text-center mb-20 section-fade-in">
+          <h2 className="text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+            Why We <span className="gradient-text-accent">Exist</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mb-8"></div>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Built by operators who've lived the chaos of inventory at scale.
+          </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <p className="text-xl leading-relaxed text-slate-700">
-                Built by operators who've lived the chaos of inventory at scale.
-              </p>
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="space-y-8 section-fade-in">
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-slate-900">
+                  Born from Real Pain
+                </h3>
+                <p className="text-xl leading-relaxed text-slate-700">
+                  We've felt the pain of systems that break when you need them most. Of data that lies when decisions matter. Of complexity that grows faster than your team.
+                </p>
+              </div>
               
-              <p className="text-lg leading-relaxed text-slate-600">
-                We've felt the pain of systems that break when you need them most. Of data that lies when decisions matter. Of complexity that grows faster than your team.
-              </p>
-              
-              <p className="text-lg leading-relaxed text-slate-600">
-                Modern brands deserve infrastructure that thinks like they do — global, intelligent, and obsessed with excellence.
-              </p>
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-slate-900">
+                  Built for Excellence
+                </h3>
+                <p className="text-lg leading-relaxed text-slate-600">
+                  Modern brands deserve infrastructure that thinks like they do — global, intelligent, and obsessed with excellence. No compromises, no technical debt, no legacy constraints.
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-slate-900">
+                  Operator-First Design
+                </h3>
+                <p className="text-lg leading-relaxed text-slate-600">
+                  Every feature is born from real operator needs. Every interface designed for rapid decision-making. Every integration built for the way modern brands actually work.
+                </p>
+              </div>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-6 pt-8">
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-slate-900">500M+</div>
-                <div className="text-sm text-slate-600">SKUs Managed Collectively</div>
+            {/* Enhanced Stats */}
+            <div className="grid sm:grid-cols-2 gap-8 pt-12 border-t border-slate-100">
+              <div className="text-center sm:text-left">
+                <div className="text-4xl font-bold gradient-text-accent mb-2">500M+</div>
+                <div className="text-sm text-slate-600 font-medium">SKUs Managed Collectively</div>
+                <div className="text-xs text-slate-500 mt-1">By our founding team</div>
               </div>
-              <div className="space-y-2">
-                <div className="text-3xl font-bold text-slate-900">15+</div>
-                <div className="text-sm text-slate-600">Years Combined Experience</div>
+              <div className="text-center sm:text-left">
+                <div className="text-4xl font-bold gradient-text-accent mb-2">15+</div>
+                <div className="text-sm text-slate-600 font-medium">Years Combined Experience</div>
+                <div className="text-xs text-slate-500 mt-1">In global inventory ops</div>
               </div>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap gap-3 pt-8">
+              <div className="trust-indicator">Series A+ Operators</div>
+              <div className="trust-indicator">Global Scale Experience</div>
+              <div className="trust-indicator">No VC Pressure</div>
             </div>
           </div>
 
-          <div className="relative">
-            <div className="aspect-square rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-              <div className="grid grid-cols-3 gap-4 p-8">
-                {Array.from({ length: 9 }).map((_, i) => (
+          {/* Enhanced Visual Element */}
+          <div className="relative section-fade-in">
+            <div className="aspect-square rounded-3xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center relative overflow-hidden">
+              {/* Grid of floating elements */}
+              <div className="grid grid-cols-4 gap-4 p-12">
+                {Array.from({ length: 16 }).map((_, i) => (
                   <div
                     key={i}
-                    className="w-12 h-12 rounded-lg bg-white/80 backdrop-blur-sm shadow-sm animate-float"
+                    className="w-8 h-8 rounded-xl glass-effect shadow-sm floating-element"
                     style={{ 
-                      animationDelay: `${i * 0.2}s`,
-                      animationDuration: `${4 + i * 0.5}s`
+                      animationDelay: `${i * 0.3}s`,
+                      animationDuration: `${6 + i * 0.2}s`
                     }}
                   />
                 ))}
               </div>
+              
+              {/* Overlay gradients */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl"></div>
+              
+              {/* Central glow */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-r from-indigo-300/30 to-purple-300/30 rounded-full blur-2xl animate-glow"></div>
             </div>
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10"></div>
           </div>
         </div>
       </div>
