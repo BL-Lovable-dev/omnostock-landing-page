@@ -1,10 +1,12 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { EmailService } from "./services/email";
 import { insertWaitlistSubscriberSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  const emailService = new EmailService();
 
   // Waitlist subscription endpoint
   app.post("/api/waitlist/subscribe", async (req, res) => {
@@ -35,6 +37,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         subscriber = await storage.createWaitlistSubscriber({
           email
         });
+      }
+
+      // Send welcome email autoresponder
+      try {
+        await emailService.sendWelcomeEmail(email);
+        console.log(`Welcome email sent to ${email}`);
+      } catch (emailError) {
+        console.error(`Failed to send welcome email to ${email}:`, emailError);
+        // Don't block the subscription if email fails
       }
 
       res.status(201).json({
