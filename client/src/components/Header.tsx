@@ -30,7 +30,7 @@ const Header = () => {
         style={{ width: `${Math.min((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100, 100)}%` }}
       />
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           <div className="flex items-center space-x-2 animate-fade-in hover-glow">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-800 to-slate-600 flex items-center justify-center">
               <span className="text-white font-bold text-sm">O</span>
@@ -38,7 +38,7 @@ const Header = () => {
             <span className="font-semibold text-lg tracking-tight">OmnoStock</span>
           </div>
           
-          <nav className="hidden md:flex items-center space-x-8 animate-fade-in-delay">
+          <nav className="hidden md:flex items-center space-x-6 animate-fade-in-delay">
             <button 
               onClick={() => scrollToSection('mission')}
               className="text-slate-600 hover:text-slate-900 transition-all duration-200 text-sm font-medium hover-lift"

@@ -5,33 +5,33 @@ const Features = () => {
   const features = [
     {
       icon: BarChart3,
-      title: "Real-time Analytics",
-      description: "Live inventory tracking with predictive insights and automated alerts."
+      title: "Powerful Analytics",
+      description: "Get insights that help you make better business decisions."
     },
     {
       icon: Globe,
-      title: "Global Scale",
-      description: "Multi-location inventory management across warehouses and regions."
+      title: "Built to Scale",
+      description: "Designed to grow with your business, from startup to enterprise."
     },
     {
       icon: Shield,
-      title: "Enterprise Security",
-      description: "Bank-grade security with role-based access and audit trails."
+      title: "Secure & Reliable",
+      description: "Enterprise-grade security you can trust with your data."
     },
     {
       icon: Zap,
       title: "Lightning Fast",
-      description: "Sub-second response times even with millions of SKUs."
+      description: "Optimized for speed and performance at any scale."
     },
     {
       icon: Users,
-      title: "Team Collaboration",
-      description: "Built for teams with workflows, approvals, and notifications."
+      title: "Team Ready",
+      description: "Built for collaboration with teams of any size."
     },
     {
       icon: TrendingUp,
-      title: "Smart Forecasting",
-      description: "AI-powered demand forecasting and automatic reorder points."
+      title: "Smart Technology",
+      description: "Powered by intelligent algorithms and machine learning."
     }
   ];
 
@@ -44,14 +44,14 @@ const Features = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full glass-effect text-slate-700 text-sm font-medium mb-6">
-            <span className="gradient-text-accent font-semibold">Built for Scale</span>
+            <span className="gradient-text-accent font-semibold">Why Choose Us</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-            Everything you need to
-            <span className="gradient-text-accent block">manage inventory</span>
+            Built for the
+            <span className="gradient-text-accent block">modern business</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            From startups to enterprise, OmnoStock scales with your business needs
+            A platform designed with innovation, security, and scalability at its core
           </p>
         </div>
 
