@@ -64,9 +64,10 @@ export class MailchimpService {
   async addSubscriber(email: string, tags: string[] = [], enableAutoresponder: boolean = true): Promise<MailchimpResponse> {
     const subscriberHash = this.getSubscriberHash(email);
     
-    // Always use PUT to handle both new and existing members
-    const memberData: MailchimpMember = {
+    // Minimal data to avoid merge field validation
+    const memberData = {
       email_address: email,
+      status_if_new: 'subscribed',
       status: 'subscribed'
     };
 

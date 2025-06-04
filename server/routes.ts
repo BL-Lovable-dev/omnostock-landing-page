@@ -25,22 +25,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Add to Mailchimp
-      const mailchimpResponse = await mailchimpService.addSubscriber(email);
-
       // Store in database
       let subscriber;
       if (existingSubscriber) {
         // Reactivate existing subscriber
         subscriber = await storage.updateWaitlistSubscriber(email, {
-          isActive: true,
-          mailchimpId: mailchimpResponse.id
+          isActive: true
         });
       } else {
         // Create new subscriber
         subscriber = await storage.createWaitlistSubscriber({
-          email,
-          mailchimpId: mailchimpResponse.id
+          email
         });
       }
 
