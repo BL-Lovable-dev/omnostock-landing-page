@@ -67,9 +67,12 @@ const Hero = () => {
 
         {/* Enhanced Main Headline */}
         <div className="stagger-children">
-          <h1 className="text-6xl lg:text-7xl font-bold leading-tight mb-6">
+          <h1 className="text-6xl lg:text-8xl font-black leading-[0.9] mb-8 tracking-tight">
             <span className="gradient-text block">Inventory</span>
-            <span className="text-slate-900 block">Reimagined</span>
+            <span className="text-slate-900 block relative">
+              Reimagined
+              <div className="absolute -bottom-2 left-0 w-32 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"></div>
+            </span>
           </h1>
 
           {/* Enhanced Subheadline */}
@@ -90,20 +93,32 @@ const Hero = () => {
         <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-16 animate-fade-in-delay">
           <div className="space-y-4">
             <div className="input-floating-label">
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5 z-10" />
+              <div className="relative group">
+                <Mail className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 z-10 transition-colors duration-200 ${
+                  email ? (isValid ? 'text-green-500' : 'text-red-400') : 'text-slate-400 group-focus-within:text-indigo-500'
+                }`} />
                 <Input
                   type="email"
                   placeholder="your@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 pr-10 h-12 text-base border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 glass-effect-strong"
+                  className={`pl-10 pr-10 h-12 text-base transition-all duration-200 glass-effect-strong ${
+                    email ? (isValid ? 'border-green-500 focus:border-green-500 focus:ring-green-500' : 'border-red-400 focus:border-red-400 focus:ring-red-400') : 'border-slate-200 focus:border-indigo-500 focus:ring-indigo-500'
+                  }`}
                   required
                 />
                 {email && isValid && (
-                  <Check className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-500 w-5 h-5" />
+                  <Check className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-500 w-5 h-5 animate-in fade-in-0 zoom-in-95 duration-200" />
+                )}
+                {email && !isValid && (
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 rounded-full bg-red-100 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                  </div>
                 )}
               </div>
+              {email && !isValid && (
+                <p className="text-xs text-red-500 mt-1 animate-in slide-in-from-top-1 duration-200">Please enter a valid email address</p>
+              )}
             </div>
             
             <Button 
