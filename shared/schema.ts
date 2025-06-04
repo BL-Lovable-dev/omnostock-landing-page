@@ -23,8 +23,11 @@ export const insertUserSchema = createInsertSchema(users).pick({
 
 export const insertWaitlistSubscriberSchema = createInsertSchema(waitlistSubscribers).pick({
   email: true,
+  mailchimpId: true,
 }).extend({
   email: z.string().email("Please enter a valid email address"),
+}).omit({
+  mailchimpId: true,
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;

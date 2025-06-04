@@ -4,12 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useParallax } from '@/hooks/useParallax';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
 
 const Hero = () => {
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const parallaxRef1 = useParallax(0.3);
   const parallaxRef2 = useParallax(-0.2);
@@ -20,22 +22,37 @@ const Hero = () => {
     setIsValid(emailRegex.test(email));
   }, [email]);
 
+  const subscribeToWaitlist = useMutation({
+    mutationFn: async (email: string) => {
+      return apiRequest('/api/waitlist/subscribe', {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+      });
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "You're on the list!",
+        description: "We'll notify you when OmnoStock launches with early access.",
+      });
+      setEmail('');
+      // Invalidate any waitlist-related queries
+      queryClient.invalidateQueries({ queryKey: ['waitlist'] });
+    },
+    onError: (error: any) => {
+      const errorMessage = error.message || "Failed to join waitlist. Please try again.";
+      toast({
+        title: "Subscription failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    },
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !isValid) return;
+    if (!email || !isValid || subscribeToWaitlist.isPending) return;
 
-    setIsSubmitting(true);
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    toast({
-      title: "You're on the list! 🎉",
-      description: "We'll notify you when OmnoStock launches with early access.",
-    });
-
-    setEmail('');
-    setIsSubmitting(false);
+    subscribeToWaitlist.mutate(email);
   };
 
   return (
@@ -127,10 +144,10 @@ const Hero = () => {
 
             <Button 
               type="submit" 
-              disabled={isSubmitting || !isValid || !email}
+              disabled={subscribeToWaitlist.isPending || !isValid || !email}
               className="w-full h-12 px-6 btn-primary group"
             >
-              {isSubmitting ? (
+              {subscribeToWaitlist.isPending ? (
                 <div className="flex items-center gap-2">
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   <span>Joining...</span>

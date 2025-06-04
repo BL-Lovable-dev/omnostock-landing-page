@@ -8,7 +8,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   
   // Waitlist methods
-  createWaitlistSubscriber(subscriber: InsertWaitlistSubscriber): Promise<WaitlistSubscriber>;
+  createWaitlistSubscriber(subscriber: InsertWaitlistSubscriber & { mailchimpId?: string }): Promise<WaitlistSubscriber>;
   getWaitlistSubscriberByEmail(email: string): Promise<WaitlistSubscriber | undefined>;
   updateWaitlistSubscriber(email: string, updates: Partial<WaitlistSubscriber>): Promise<WaitlistSubscriber>;
   getAllWaitlistSubscribers(): Promise<WaitlistSubscriber[]>;
@@ -33,7 +33,7 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async createWaitlistSubscriber(subscriber: InsertWaitlistSubscriber): Promise<WaitlistSubscriber> {
+  async createWaitlistSubscriber(subscriber: InsertWaitlistSubscriber & { mailchimpId?: string }): Promise<WaitlistSubscriber> {
     const [waitlistSubscriber] = await db
       .insert(waitlistSubscribers)
       .values(subscriber)

@@ -1,13 +1,167 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { MailchimpService } from "./services/mailchimp";
+import { insertWaitlistSubscriberSchema } from "@shared/schema";
+import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // put application routes here
-  // prefix all routes with /api
+  const mailchimpService = new MailchimpService();
 
-  // use storage to perform CRUD operations on the storage interface
-  // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
+  // Waitlist subscription endpoint
+  app.post("/api/waitlist/subscribe", async (req, res) => {
+    try {
+      // Validate request body
+      const validatedData = insertWaitlistSubscriberSchema.parse(req.body);
+      const { email } = validatedData;
+
+      // Check if subscriber already exists
+      const existingSubscriber = await storage.getWaitlistSubscriberByEmail(email);
+      if (existingSubscriber && existingSubscriber.isActive) {
+        return res.status(200).json({
+          success: true,
+          message: "You're already on our waitlist!",
+          subscriber: existingSubscriber
+        });
+      }
+
+      // Add to Mailchimp
+      const mailchimpResponse = await mailchimpService.addSubscriber(email, ['waitlist']);
+      
+      // Store in database
+      let subscriber;
+      if (existingSubscriber) {
+        // Reactivate existing subscriber
+        subscriber = await storage.updateWaitlistSubscriber(email, {
+          isActive: true,
+          mailchimpId: mailchimpResponse.id
+        });
+      } else {
+        // Create new subscriber
+        subscriber = await storage.createWaitlistSubscriber({
+          email,
+          mailchimpId: mailchimpResponse.id
+        });
+      }
+
+      res.status(201).json({
+        success: true,
+        message: "Successfully joined the waitlist!",
+        subscriber: {
+          id: subscriber.id,
+          email: subscriber.email,
+          subscribedAt: subscriber.subscribedAt
+        }
+      });
+
+    } catch (error: any) {
+      console.error("Waitlist subscription error:", error);
+      
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid email address",
+          errors: error.errors
+        });
+      }
+
+      if (error.message.includes('Mailchimp')) {
+        return res.status(500).json({
+          success: false,
+          message: "Failed to subscribe to email list. Please try again."
+        });
+      }
+
+      res.status(500).json({
+        success: false,
+        message: "Internal server error. Please try again."
+      });
+    }
+  });
+
+  // Get waitlist status endpoint
+  app.get("/api/waitlist/status/:email", async (req, res) => {
+    try {
+      const { email } = req.params;
+      
+      if (!email || !z.string().email().safeParse(email).success) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid email address"
+        });
+      }
+
+      const subscriber = await storage.getWaitlistSubscriberByEmail(email);
+      
+      if (!subscriber || !subscriber.isActive) {
+        return res.status(404).json({
+          success: false,
+          message: "Email not found on waitlist"
+        });
+      }
+
+      res.json({
+        success: true,
+        subscriber: {
+          id: subscriber.id,
+          email: subscriber.email,
+          subscribedAt: subscriber.subscribedAt
+        }
+      });
+
+    } catch (error) {
+      console.error("Waitlist status check error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Internal server error"
+      });
+    }
+  });
+
+  // Admin endpoint to get all waitlist subscribers
+  app.get("/api/waitlist/subscribers", async (req, res) => {
+    try {
+      const subscribers = await storage.getAllWaitlistSubscribers();
+      
+      res.json({
+        success: true,
+        count: subscribers.length,
+        subscribers: subscribers.map(sub => ({
+          id: sub.id,
+          email: sub.email,
+          subscribedAt: sub.subscribedAt
+        }))
+      });
+
+    } catch (error) {
+      console.error("Get subscribers error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Internal server error"
+      });
+    }
+  });
+
+  // Mailchimp connection test endpoint
+  app.get("/api/waitlist/test-connection", async (req, res) => {
+    try {
+      const isConnected = await mailchimpService.testConnection();
+      
+      res.json({
+        success: true,
+        connected: isConnected,
+        message: isConnected ? "Mailchimp connection successful" : "Mailchimp connection failed"
+      });
+
+    } catch (error) {
+      console.error("Mailchimp connection test error:", error);
+      res.status(500).json({
+        success: false,
+        connected: false,
+        message: "Failed to test Mailchimp connection"
+      });
+    }
+  });
 
   const httpServer = createServer(app);
 
