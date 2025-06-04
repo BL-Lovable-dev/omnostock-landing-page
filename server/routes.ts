@@ -62,21 +62,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         return res.status(400).json({
           success: false,
-          message: "Invalid email address",
+          message: "Invalid email format",
           errors: error.errors
+        });
+      }
+
+      // Handle specific Mailchimp errors
+      if (error.message.includes('looks fake or invalid')) {
+        return res.status(400).json({
+          success: false,
+          message: "Please enter a valid, real email address"
+        });
+      }
+
+      if (error.message.includes('Member Exists')) {
+        return res.status(200).json({
+          success: true,
+          message: "You're already subscribed to our list!"
         });
       }
 
       if (error.message.includes('Mailchimp')) {
         return res.status(500).json({
           success: false,
-          message: "Failed to subscribe to email list. Please try again."
+          message: "Email subscription service is temporarily unavailable. Please try again later."
         });
       }
 
       res.status(500).json({
         success: false,
-        message: "Internal server error. Please try again."
+        message: "Something went wrong. Please try again."
       });
     }
   });
