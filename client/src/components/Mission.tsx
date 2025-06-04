@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 
 const Mission = () => {
@@ -46,7 +45,7 @@ const Mission = () => {
                   We've felt the pain of systems that break when you need them most. Of data that lies when decisions matter. Of complexity that grows faster than your team.
                 </p>
               </div>
-              
+
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-slate-900">
                   Built for Excellence
@@ -67,18 +66,7 @@ const Mission = () => {
             </div>
 
             {/* Enhanced Stats */}
-            <div className="grid sm:grid-cols-2 gap-8 pt-12 border-t border-slate-100">
-              <div className="text-center sm:text-left">
-                <div className="text-4xl font-bold gradient-text-accent mb-2">500M+</div>
-                <div className="text-sm text-slate-600 font-medium">SKUs Managed Collectively</div>
-                <div className="text-xs text-slate-500 mt-1">By our founding team</div>
-              </div>
-              <div className="text-center sm:text-left">
-                <div className="text-4xl font-bold gradient-text-accent mb-2">15+</div>
-                <div className="text-sm text-slate-600 font-medium">Years Combined Experience</div>
-                <div className="text-xs text-slate-500 mt-1">In global inventory ops</div>
-              </div>
-            </div>
+
 
             {/* Trust Indicators */}
             <div className="flex flex-wrap gap-3 pt-8">
@@ -104,11 +92,11 @@ const Mission = () => {
                   />
                 ))}
               </div>
-              
+
               {/* Overlay gradients */}
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-3xl"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl"></div>
-              
+
               {/* Central glow */}
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-r from-indigo-300/30 to-purple-300/30 rounded-full blur-2xl animate-glow"></div>
             </div>
