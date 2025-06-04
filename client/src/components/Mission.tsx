@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Target, Zap, Globe, Shield } from 'lucide-react';
 
 const Mission = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -76,29 +77,54 @@ const Mission = () => {
             </div>
           </div>
 
-          {/* Enhanced Visual Element */}
+          {/* Core Values Visual */}
           <div className="relative section-fade-in">
-            <div className="aspect-square rounded-3xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center relative overflow-hidden">
-              {/* Grid of floating elements */}
-              <div className="grid grid-cols-4 gap-4 p-12">
-                {Array.from({ length: 16 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-xl glass-effect shadow-sm floating-element"
-                    style={{ 
-                      animationDelay: `${i * 0.3}s`,
-                      animationDuration: `${6 + i * 0.2}s`
-                    }}
-                  />
-                ))}
+            <div className="aspect-square rounded-3xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center relative overflow-hidden p-8">
+              {/* Core Values Grid */}
+              <div className="grid grid-cols-2 gap-8 w-full h-full">
+                {/* Precision */}
+                <div className="flex flex-col items-center justify-center text-center group">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-3 transform group-hover:scale-110 transition-all duration-300 shadow-lg floating-element" style={{ animationDelay: '0s' }}>
+                    <Target className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="text-sm font-bold text-slate-900 mb-1">Precision</h4>
+                  <p className="text-xs text-slate-600 leading-tight">Accurate inventory tracking</p>
+                </div>
+
+                {/* Speed */}
+                <div className="flex flex-col items-center justify-center text-center group">
+                  <div className="w-16 h-16 bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl flex items-center justify-center mb-3 transform group-hover:scale-110 transition-all duration-300 shadow-lg floating-element" style={{ animationDelay: '0.5s' }}>
+                    <Zap className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="text-sm font-bold text-slate-900 mb-1">Speed</h4>
+                  <p className="text-xs text-slate-600 leading-tight">Real-time updates</p>
+                </div>
+
+                {/* Global */}
+                <div className="flex flex-col items-center justify-center text-center group">
+                  <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center mb-3 transform group-hover:scale-110 transition-all duration-300 shadow-lg floating-element" style={{ animationDelay: '1s' }}>
+                    <Globe className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="text-sm font-bold text-slate-900 mb-1">Global</h4>
+                  <p className="text-xs text-slate-600 leading-tight">Worldwide operations</p>
+                </div>
+
+                {/* Security */}
+                <div className="flex flex-col items-center justify-center text-center group">
+                  <div className="w-16 h-16 bg-gradient-to-r from-violet-500 to-purple-500 rounded-xl flex items-center justify-center mb-3 transform group-hover:scale-110 transition-all duration-300 shadow-lg floating-element" style={{ animationDelay: '1.5s' }}>
+                    <Shield className="w-8 h-8 text-white" />
+                  </div>
+                  <h4 className="text-sm font-bold text-slate-900 mb-1">Security</h4>
+                  <p className="text-xs text-slate-600 leading-tight">Enterprise-grade protection</p>
+                </div>
               </div>
 
               {/* Overlay gradients */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-3xl"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent rounded-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent rounded-3xl pointer-events-none"></div>
 
-              {/* Central glow */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-r from-indigo-300/30 to-purple-300/30 rounded-full blur-2xl animate-glow"></div>
+              {/* Subtle central glow */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-r from-indigo-300/20 to-purple-300/20 rounded-full blur-xl animate-glow pointer-events-none"></div>
             </div>
           </div>
         </div>
