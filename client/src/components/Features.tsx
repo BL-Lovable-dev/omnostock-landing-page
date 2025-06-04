@@ -10,38 +10,38 @@ const Features = () => {
   const features = [
     {
       icon: BarChart3,
-      title: "Powerful Analytics",
-      description: "Get insights that help you make better business decisions.",
+      title: "Smart Insights",
+      description: "Get the data you need to make informed decisions.",
       color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Globe,
       title: "Built to Scale",
-      description: "Designed to grow with your business, from startup to enterprise.",
+      description: "Designed to grow with your business needs.",
       color: "from-emerald-500 to-teal-500"
     },
     {
       icon: Shield,
       title: "Secure & Reliable",
-      description: "Enterprise-grade security you can trust with your data.",
+      description: "Your data is protected with industry-standard security.",
       color: "from-violet-500 to-purple-500"
     },
     {
       icon: Zap,
       title: "Lightning Fast",
-      description: "Optimized for speed and performance at any scale.",
+      description: "Optimized for speed and efficiency.",
       color: "from-amber-500 to-orange-500"
     },
     {
       icon: Users,
-      title: "Team Ready",
-      description: "Built for collaboration with teams of any size.",
+      title: "Team Collaboration",
+      description: "Work seamlessly with your team members.",
       color: "from-rose-500 to-pink-500"
     },
     {
       icon: TrendingUp,
-      title: "Smart Technology",
-      description: "Powered by intelligent algorithms and machine learning.",
+      title: "Modern Technology",
+      description: "Built with cutting-edge tools and best practices.",
       color: "from-indigo-500 to-blue-500"
     }
   ];

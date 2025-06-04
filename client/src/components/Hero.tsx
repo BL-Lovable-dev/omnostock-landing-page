@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { ArrowRight, Mail, Check, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,7 +10,7 @@ const Hero = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const { toast } = useToast();
-  
+
   const parallaxRef1 = useParallax(0.3);
   const parallaxRef2 = useParallax(-0.2);
   const parallaxRef3 = useParallax(0.5);
@@ -26,15 +25,15 @@ const Hero = () => {
     if (!email || !isValid) return;
 
     setIsSubmitting(true);
-    
+
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     toast({
       title: "You're on the list! 🎉",
       description: "We'll notify you when OmnoStock launches with early access.",
     });
-    
+
     setEmail('');
     setIsSubmitting(false);
   };
@@ -47,7 +46,7 @@ const Hero = () => {
         <div ref={parallaxRef1} className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-indigo-100/40 to-purple-100/40 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-full blur-3xl animate-float"></div>
         <div ref={parallaxRef2} className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-br from-slate-100/60 to-gray-100/60 dark:from-slate-700/40 dark:to-gray-700/40 rounded-full blur-3xl animate-float-delayed"></div>
         <div ref={parallaxRef3} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-50/30 to-indigo-50/30 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-full blur-3xl animate-pulse-soft"></div>
-        
+
         {/* Floating particles */}
         {Array.from({ length: 8 }).map((_, i) => (
           <div
@@ -125,7 +124,7 @@ const Hero = () => {
                 <p className="text-xs text-red-500 mt-1 animate-in slide-in-from-top-1 duration-200">Please enter a valid email address</p>
               )}
             </div>
-            
+
             <Button 
               type="submit" 
               disabled={isSubmitting || !isValid || !email}
@@ -144,7 +143,7 @@ const Hero = () => {
               )}
             </Button>
           </div>
-          
+
           <div className="flex items-center justify-center gap-4 text-xs text-slate-500 mt-4">
             <span className="flex items-center gap-1">
               <Check className="w-3 h-3 text-green-500" />
