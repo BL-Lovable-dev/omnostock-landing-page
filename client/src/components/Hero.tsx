@@ -160,29 +160,10 @@ const Hero = () => {
           </div>
         </form>
 
-        {/* Enhanced Social Proof */}
+        {/* Simple CTA message */}
         <div className="max-w-2xl mx-auto animate-fade-in-delay">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-slate-500">
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {Array.from({ length: 3 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 border-2 border-white animate-glow"
-                    style={{ animationDelay: `${i * 0.5}s` }}
-                  />
-                ))}
-              </div>
-              <span>150+ operators joined</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="flex text-yellow-400">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current" />
-                ))}
-              </div>
-              <span>Backed by industry leaders</span>
-            </div>
+          <div className="text-center text-sm text-slate-500">
+            <span>Join the waitlist and be among the first to experience the future of inventory management</span>
           </div>
         </div>
       </div>
