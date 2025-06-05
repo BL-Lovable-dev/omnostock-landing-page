@@ -1,9 +1,9 @@
 {
   "name": "waitlist-app",
   "version": "1.0.0",
-  "main": "standalone-server.js",
+  "main": "production-server.js",
   "scripts": {
-    "start": "node standalone-server.js"
+    "start": "node production-server.js"
   },
   "engines": {
     "node": "18.x"
