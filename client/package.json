@@ -1,0 +1,16 @@
+{
+  "name": "waitlist-client",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build --outDir ../dist/public"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.14",
+    "@vitejs/plugin-react": "^4.3.3"
+  }
+}
