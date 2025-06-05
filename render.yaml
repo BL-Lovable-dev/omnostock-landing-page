@@ -3,8 +3,8 @@ services:
     name: waitlist-app
     env: node
     plan: free
-    buildCommand: cp package-simple.json package.json && npm install
-    startCommand: node server-clean.js
+    buildCommand: rm -f package.json && cp package-new.json package.json && npm install
+    startCommand: node app.js
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
