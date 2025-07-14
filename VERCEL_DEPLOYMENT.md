@@ -18,36 +18,31 @@
 - Connection pooling optimized for serverless
 - Handles duplicate email errors gracefully
 
-## Deployment Steps
+## Ready to Deploy!
 
-### Step 1: Install Vercel CLI
+### Quick Deploy (Recommended)
 ```bash
-npm install -g vercel
+# Run the automated deployment script
+./deploy.sh
 ```
 
-### Step 2: Login to Vercel
+### Manual Deploy
 ```bash
-vercel login
+# 1. Login to Vercel
+npx vercel login
+
+# 2. Deploy to production
+npx vercel --prod
+
+# 3. Set environment variable in Vercel dashboard
+# Add: DATABASE_URL = your_postgresql_connection_string
 ```
 
-### Step 3: Set Up Database
-You can use:
-- **Vercel Postgres** (recommended) - Built-in integration
-- **Neon.tech** - Serverless PostgreSQL (free tier)
-- **Current database** - Just add connection string
-
-### Step 4: Configure Environment Variables
-In Vercel dashboard or CLI:
-```bash
-vercel env add DATABASE_URL
-# Enter your PostgreSQL connection string
-```
-
-### Step 5: Deploy
-```bash
-# From project root
-vercel --prod
-```
+### After Deployment
+1. Visit your new Vercel URL
+2. Test the form submission
+3. Check database for new leads
+4. Configure custom domain (optional)
 
 ## Database Migration (if needed)
 
