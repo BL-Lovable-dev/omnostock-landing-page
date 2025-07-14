@@ -16,6 +16,16 @@ export const waitlistSubscribers = pgTable("waitlist_subscribers", {
   isActive: boolean("is_active").default(true).notNull(),
 });
 
+export const omnistockLeads = pgTable("omnostock_leads", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  company: text("company").notNull(),
+  website: text("website"),
+  phone: text("phone"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -30,7 +40,23 @@ export const insertWaitlistSubscriberSchema = createInsertSchema(waitlistSubscri
   mailchimpId: true,
 });
 
+export const insertOmnistockLeadSchema = createInsertSchema(omnistockLeads).pick({
+  name: true,
+  email: true,
+  company: true,
+  website: true,
+  phone: true,
+}).extend({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Please enter a valid email address"),
+  company: z.string().min(1, "Company name is required"),
+  website: z.string().url("Please enter a valid website URL").optional().or(z.literal("")),
+  phone: z.string().min(1, "Phone number is required"),
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertWaitlistSubscriber = z.infer<typeof insertWaitlistSubscriberSchema>;
 export type WaitlistSubscriber = typeof waitlistSubscribers.$inferSelect;
+export type InsertOmnistockLead = z.infer<typeof insertOmnistockLeadSchema>;
+export type OmnistockLead = typeof omnistockLeads.$inferSelect;

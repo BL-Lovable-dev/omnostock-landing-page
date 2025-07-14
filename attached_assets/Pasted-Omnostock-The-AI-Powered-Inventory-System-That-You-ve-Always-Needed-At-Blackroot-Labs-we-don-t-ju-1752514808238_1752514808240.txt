@@ -1,0 +1,37 @@
+Omnostock: The AI-Powered Inventory System That You’ve Always Needed
+At Blackroot Labs, we don’t just build products — we engineer intelligent systems that shift the ground beneath industries. After 7 relentless weeks of iteration, edge-case debugging, and deep customer research, we’re proud to unveil Omnostock: an AI-powered inventory management platform built to solve the real, brutal problems faced by modern e-commerce operations — online and offline.
+This isn’t just software. This is a control tower for your inventory, built to scale your ops, cut your waste, and predict your next move — intelligently.
+Why We Built Omnostock
+Most inventory systems treat your business like a spreadsheet with buttons. They lack intelligence, adaptability, and worst of all — they assume your entire operations happen online.
+But Omnostock is different.
+It was built from scratch to serve the hybrid realities of commerce today — where warehouses, storefronts, and social shops all converge, and inventory mistakes are expensive.
+Core Features That Matter
+We didn’t build buzzwords. We built for what real businesses actually struggle with.
+Real-Time Inventory Sync: Live syncing with your online store — Shopify, WooCommerce, or custom builds — means inventory stays accurate and up to date, always.
+Offline Inventory Management: Omnostock isn't just for e-commerce. It supports offline product catalogs, allowing teams to manage physical stock in pop-ups, warehouses, or retail outlets with the same accuracy and intelligence.
+Stock Transfer Between Locations: Easily move inventory across different warehouses or retail locations. Every transfer is logged, auditable, and reflected in your reporting engine.
+Record Sales for Offline Inventory: Manually or automatically log sales from in-person events, WhatsApp, or walk-ins. This ensures your data remains complete across all touchpoints.
+Sales History & Logs: Drill into every sale made — whether online or offline. Perfect for reconciling returns, identifying fraud, or doing performance reviews.
+Advanced Location-Based Reports: Get granular insights per outlet or warehouse. See what’s selling in Lagos vs. London, or which location is underperforming — all at a glance.
+Smart Reorder Recommendations (AI-Powered): AI analyzes your historical sales, seasonality, and supply timelines to recommend restocks — before you even know you need them.
+Auto-Purchase Order Generator: Omnostock converts low-stock alerts into full supplier-ready purchase orders. Send them via WhatsApp, Email, or export them — instantly.
+Sell-Through & Product Velocity Analytics: Discover your fastest-moving SKUs, deadstock items, and hidden top performers. Perfect for refining marketing spend and product strategy.
+Multi-User Access & Role Permissions: From inventory managers to sales assistants, define exactly who can do what — and prevent costly errors or unauthorized actions.
+Built-in Forecast Engine: No more stock panic. Omnostock uses AI to forecast demand, suggest reorder windows, and help you prep for spikes and slumps.
+We even ran it in live retail environments to break it intentionally — and rebuild it smarter.
+Why It’s a Game-Changer
+Omnostock gives growing commerce brands the kind of operational infrastructure only enterprise companies used to afford — but with the flexibility, intelligence, and affordability tailored for the modern market.
+Whether you sell on your own website, through DMs, in a physical store, or across several warehouses — this is the one system that keeps your stock, team, and growth aligned.
+Available Now — But Not As SaaS
+Omnostock isn’t available as a public SaaS — yet. We’re deploying it as a customized implementation through Blackroot Labs. We adapt it to your stack, workflows, team, and market realities.
+Work With Us
+If this sounds like the backbone your business has been missing, let’s talk.
+Blackroot Labs is open to building a version of Omnostock tailored for your business — or even creating a more powerful version from scratch.
+Complete the form below, and we’ll be in touch to discuss a custom solution or your business. 
+Form Fields
+Name
+Email
+Company name
+Website
+Phone number (WhatsApp)
+Blackroot Labs — where experimental AI becomes your unfair advantage.
