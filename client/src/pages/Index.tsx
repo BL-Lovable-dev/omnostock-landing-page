@@ -317,9 +317,9 @@ const Index = () => {
                 description: "From inventory managers to sales assistants, define exactly who can do what and prevent errors."
               }
             ].map((feature, index) => (
-              <Card key={index} className="group hover:shadow-md transition-all duration-300 border-gray-100 hover:border-gray-200">
+              <Card key={index} className="group hover:shadow-sm transition-all duration-300 border-gray-100 hover:border-gray-200 bg-white">
                 <CardContent className="p-6">
-                  <div className="w-10 h-10 bg-gray-50 group-hover:bg-gray-100 rounded-lg flex items-center justify-center mb-4 text-gray-800 transition-colors duration-300">
+                  <div className="w-12 h-12 bg-gray-50 group-hover:bg-gray-100 rounded-xl flex items-center justify-center mb-4 text-gray-700 transition-colors duration-300">
                     {feature.icon}
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">{feature.title}</h3>
