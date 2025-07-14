@@ -20,21 +20,30 @@ const insertOmnistockLeadSchema = z.object({
 });
 
 export default async function handler(req, res) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  try {
+    // Enable CORS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
+    if (req.method === 'OPTIONS') {
+      res.status(200).end();
+      return;
+    }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ success: false, message: 'Method not allowed' });
-  }
+    if (req.method !== 'POST') {
+      return res.status(405).json({ success: false, message: 'Method not allowed' });
+    }
 
-  let client;
+    // Check if DATABASE_URL is set
+    if (!process.env.DATABASE_URL) {
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Database configuration missing. Please add DATABASE_URL environment variable.' 
+      });
+    }
+
+    let client;
   
   try {
     // Validate request body
@@ -98,5 +107,13 @@ export default async function handler(req, res) {
     if (client) {
       client.release();
     }
+  }
+  
+  } catch (unexpectedError) {
+    console.error('Unexpected API error:', unexpectedError);
+    res.status(500).json({
+      success: false,
+      message: "An unexpected error occurred. Please try again."
+    });
   }
 }
