@@ -1,0 +1,48 @@
+[20:38:08.568] Running build in Washington, D.C., USA (East) – iad1
+[20:38:08.568] Build machine configuration: 2 cores, 8 GB
+[20:38:08.617] Cloning github.com/BL-Lovable-dev/omnostock-landing-page (Branch: main, Commit: a3b4609)
+[20:38:08.776] Previous build caches not available
+[20:38:08.974] Cloning completed: 357.000ms
+[20:38:09.881] Running "vercel build"
+[20:38:11.064] Vercel CLI 44.3.0
+[20:38:11.983] Installing dependencies...
+[20:38:15.748] npm warn deprecated path-match@1.2.4: This package is archived and no longer maintained. For support, visit https://github.com/expressjs/express/discussions
+[20:38:17.985] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[20:38:18.019] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[20:38:24.064] 
+[20:38:24.064] added 670 packages in 12s
+[20:38:24.065] 
+[20:38:24.065] 75 packages are looking for funding
+[20:38:24.068]   run `npm fund` for details
+[20:38:36.472] 
+[20:38:36.473] added 61 packages, and audited 62 packages in 12s
+[20:38:36.474] 
+[20:38:36.474] 7 packages are looking for funding
+[20:38:36.474]   run `npm fund` for details
+[20:38:36.481] 
+[20:38:36.482] 2 moderate severity vulnerabilities
+[20:38:36.482] 
+[20:38:36.482] To address all issues (including breaking changes), run:
+[20:38:36.482]   npm audit fix --force
+[20:38:36.483] 
+[20:38:36.483] Run `npm audit` for details.
+[20:38:36.604] 
+[20:38:36.604] > waitlist-client@1.0.0 build
+[20:38:36.604] > vite build --outDir ../dist/public
+[20:38:36.604] 
+[20:38:36.897] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[20:38:37.171] transforming...
+[20:38:37.216] Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+[20:38:37.217]   npx update-browserslist-db@latest
+[20:38:37.217]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[20:38:40.897] [32m✓[39m 1636 modules transformed.
+[20:38:41.071] rendering chunks...
+[20:38:41.078] computing gzip size...
+[20:38:41.089] [2m../dist/public/[22m[32mindex.html                 [39m[1m[2m  0.74 kB[22m[1m[22m[2m │ gzip:  0.44 kB[22m
+[20:38:41.090] [2m../dist/public/[22m[2massets/[22m[35mindex-B4CwAFcO.css  [39m[1m[2m106.99 kB[22m[1m[22m[2m │ gzip: 15.90 kB[22m
+[20:38:41.090] [2m../dist/public/[22m[2massets/[22m[36mindex-rDNsgnss.js   [39m[1m[2m229.92 kB[22m[1m[22m[2m │ gzip: 71.77 kB[22m
+[20:38:41.092] [32m✓ built in 4.17s[39m
+[20:38:41.131] Error: No Output Directory named "dist" found after the Build completed. You can configure the Output Directory in your Project Settings.
+[20:38:41.131] Learn More: https://vercel.link/missing-public-directory
+[20:38:41.656] 
+[20:38:44.170] Exiting build container

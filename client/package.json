@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "vite build --outDir ../dist/public"
+    "build": "vite build"
   },
   "dependencies": {
     "react": "^18.3.1",
