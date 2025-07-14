@@ -182,100 +182,24 @@ const Index = () => {
       </section>
 
       {/* Why We Built This */}
-      <section id="why-different" className="py-20 bg-gray-50">
+      <section id="why-different" className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
               Why We Built Omnostock
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-xl text-gray-600 leading-relaxed mb-8">
               Most inventory systems treat your business like a spreadsheet with buttons. They lack intelligence, adaptability, and worst of all — they assume your entire operations happen online.
             </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Traditional Systems - Problems */}
-            <Card className="relative border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden group hover:shadow-lg transition-all duration-300">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-400 to-gray-500"></div>
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl text-gray-800 flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                    <span className="text-gray-600 text-sm">✕</span>
-                  </div>
-                  <span className="font-bold">Traditional Systems</span>
-                </CardTitle>
-                <p className="text-sm text-gray-600">What you're probably dealing with now</p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {[
-                  { text: "Assumes your entire business is online", impact: "High" },
-                  { text: "Zero intelligence or learning capability", impact: "High" },
-                  { text: "Costly stockouts and overstock disasters", impact: "Critical" },
-                  { text: "Completely disconnected from real operations", impact: "High" },
-                  { text: "Manual processes everywhere you look", impact: "Medium" }
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start gap-3 p-3 bg-white/60 rounded-lg border border-gray-200 hover:bg-white/80 transition-colors duration-200">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <div className="flex-1">
-                      <span className="text-gray-700 font-medium">{item.text}</span>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-xs text-gray-500">Impact:</span>
-                        <Badge variant="outline" className={`text-xs ${
-                          item.impact === 'Critical' ? 'border-red-300 text-red-600' : 
-                          item.impact === 'High' ? 'border-orange-300 text-orange-600' : 
-                          'border-yellow-300 text-yellow-600'
-                        }`}>
-                          {item.impact}
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
             
-            {/* Omnostock - Solutions */}
-            <Card className="relative border-gray-200 bg-gradient-to-br from-gray-900 to-gray-800 text-white overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-3xl"></div>
-              <CardHeader className="pb-4 relative z-10">
-                <CardTitle className="text-xl text-white flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm font-bold">✓</span>
-                  </div>
-                  <span className="font-bold">Omnostock Difference</span>
-                </CardTitle>
-                <p className="text-sm text-gray-300">Built for how modern commerce actually works</p>
-              </CardHeader>
-              <CardContent className="space-y-4 relative z-10">
-                {[
-                  { text: "Built for hybrid commerce realities", benefit: "Revenue" },
-                  { text: "AI-powered intelligence throughout", benefit: "Efficiency" },
-                  { text: "Prevents costly inventory errors", benefit: "Cost Savings" },
-                  { text: "Online + offline unified control", benefit: "Control" },
-                  { text: "Smart automation everywhere", benefit: "Time Savings" }
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start gap-3 p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:bg-white/10 transition-colors duration-200">
-                    <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <div className="flex-1">
-                      <span className="text-white font-medium">{item.text}</span>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-xs text-gray-400">Benefit:</span>
-                        <Badge className={`text-xs ${
-                          item.benefit === 'Revenue' ? 'bg-green-500/20 text-green-300 border-green-500/30' :
-                          item.benefit === 'Cost Savings' ? 'bg-blue-500/20 text-blue-300 border-blue-500/30' :
-                          item.benefit === 'Efficiency' ? 'bg-purple-500/20 text-purple-300 border-purple-500/30' :
-                          item.benefit === 'Control' ? 'bg-orange-500/20 text-orange-300 border-orange-500/30' :
-                          'bg-gray-500/20 text-gray-300 border-gray-500/30'
-                        }`}>
-                          {item.benefit}
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-2xl p-8 border border-orange-200 max-w-3xl mx-auto">
+              <h3 className="text-2xl font-bold text-orange-800 mb-4">
+                Built for Hybrid Commerce Realities
+              </h3>
+              <p className="text-orange-700 text-lg">
+                Where warehouses, storefronts, and social shops converge — and inventory mistakes are expensive. Omnostock gives you AI-powered intelligence across all your sales channels.
+              </p>
+            </div>
           </div>
         </div>
       </section>
