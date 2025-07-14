@@ -107,3 +107,12 @@ Preferred communication style: Simple, everyday language.
 - **Environment**: Production/development mode switching
 
 The system is designed to be deployment-flexible, with configurations for various hosting providers and both full-stack and static deployment options.
+
+## Recent Changes
+
+### July 14, 2025 - Vercel Deployment Success
+- Successfully deployed Omnostock sales page to Vercel
+- Resolved build configuration issues (toaster imports, CSS compilation)
+- Professional always-on hosting eliminates 15-minute sleep timeouts
+- Form functionality working with PostgreSQL database
+- Ready for custom domain configuration
