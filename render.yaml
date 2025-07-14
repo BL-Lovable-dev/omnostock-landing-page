@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: waitlist-app
+    name: omnostock-sales
     env: node
     plan: free
     buildCommand: rm -f package.json && cp package-new.json package.json
-    startCommand: node production-server.js
+    startCommand: node omnostock-sales-server.cjs
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV

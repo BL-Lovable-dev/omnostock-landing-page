@@ -1,9 +1,9 @@
 {
-  "name": "waitlist-app",
+  "name": "omnostock-sales",
   "version": "1.0.0",
-  "main": "production-server.js",
+  "main": "omnostock-sales-server.cjs",
   "scripts": {
-    "start": "node production-server.js"
+    "start": "node omnostock-sales-server.cjs"
   },
   "engines": {
     "node": "18.x"
