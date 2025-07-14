@@ -388,98 +388,248 @@ const Index = () => {
       </section>
 
       {/* Contact Form Section */}
-      <section id="contact" className="py-20 bg-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Work With Us
-            </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              If this sounds like the backbone your business has been missing, let's talk.
-            </p>
+      <section id="contact" className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            {/* Enhanced Header */}
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium mb-8">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse mr-2"></div>
+                <span>Available for 3 more custom implementations this quarter</span>
+              </div>
+              
+              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Ready to Transform<br />
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  Your Inventory?
+                </span>
+              </h2>
+              
+              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Join the select businesses getting custom Omnostock implementations. 
+                This isn't software-as-a-service — it's a competitive advantage built just for you.
+              </p>
+
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap justify-center gap-6 mb-12 text-gray-400">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <span className="text-sm">24-hour response</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span className="text-sm">Custom implementation</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                  <span className="text-sm">Enterprise-grade security</span>
+                </div>
+              </div>
+            </div>
             
-            <Card className="bg-white/5 backdrop-blur-lg border-white/10 max-w-2xl mx-auto">
-              <CardContent className="p-8">
-                {!isSubmitted ? (
-                  <div>
-                    <CardHeader className="pb-6">
-                      <CardTitle className="text-2xl text-white">Get Your Custom Solution</CardTitle>
-                    </CardHeader>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <Input
-                        type="text"
-                        name="name"
-                        placeholder="Your Full Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="bg-white/10 border-white/20 text-white placeholder-white/50 focus:ring-orange-400 focus:border-orange-400"
-                      />
-                      <Input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="bg-white/10 border-white/20 text-white placeholder-white/50 focus:ring-orange-400 focus:border-orange-400"
-                      />
-                      <Input
-                        type="text"
-                        name="company"
-                        placeholder="Company Name"
-                        value={formData.company}
-                        onChange={handleChange}
-                        required
-                        className="bg-white/10 border-white/20 text-white placeholder-white/50 focus:ring-orange-400 focus:border-orange-400"
-                      />
-                      <Input
-                        type="url"
-                        name="website"
-                        placeholder="Website URL (optional)"
-                        value={formData.website}
-                        onChange={handleChange}
-                        className="bg-white/10 border-white/20 text-white placeholder-white/50 focus:ring-orange-400 focus:border-orange-400"
-                      />
-                      <Input
-                        type="tel"
-                        name="phone"
-                        placeholder="Phone Number (WhatsApp)"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        required
-                        className="bg-white/10 border-white/20 text-white placeholder-white/50 focus:ring-orange-400 focus:border-orange-400"
-                      />
-                      <Button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full bg-white hover:bg-gray-50 text-gray-900 disabled:opacity-50 text-lg py-6 font-medium transition-all duration-200"
-                      >
-                        {isSubmitting ? 'Sending...' : '🚀 Get Custom Omnostock Solution'}
-                      </Button>
-                    </form>
-                    {error && (
-                      <div className="mt-4 p-4 bg-red-900/30 border border-red-800/50 rounded-lg text-red-200">
-                        {error}
+            {/* Enhanced Form Container */}
+            <div className="max-w-2xl mx-auto">
+              <Card className="bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl relative overflow-hidden">
+                {/* Card Background Effects */}
+                <div className="absolute inset-0">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+                </div>
+
+                <CardContent className="p-8 md:p-10 relative z-10">
+                  {!isSubmitted ? (
+                    <div className="space-y-8">
+                      {/* Form Header */}
+                      <div className="text-center">
+                        <div className="w-16 h-16 mx-auto bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                          <Package className="w-8 h-8 text-white" />
+                        </div>
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                          Get Your Custom Solution
+                        </h3>
+                        <p className="text-gray-300">
+                          Tell us about your business and we'll craft the perfect Omnostock implementation
+                        </p>
                       </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto bg-green-600 rounded-full flex items-center justify-center mb-4">
-                      <CheckCircle className="w-8 h-8 text-white" />
+
+                      {/* Enhanced Form */}
+                      <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="grid md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <label className="text-sm font-medium text-gray-300 block">Full Name *</label>
+                            <Input
+                              type="text"
+                              name="name"
+                              placeholder="John Smith"
+                              value={formData.name}
+                              onChange={handleChange}
+                              required
+                              className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 h-12 rounded-lg transition-all duration-200 hover:bg-white/15"
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <label className="text-sm font-medium text-gray-300 block">Email Address *</label>
+                            <Input
+                              type="email"
+                              name="email"
+                              placeholder="john@company.com"
+                              value={formData.email}
+                              onChange={handleChange}
+                              required
+                              className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 h-12 rounded-lg transition-all duration-200 hover:bg-white/15"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-gray-300 block">Company Name *</label>
+                          <Input
+                            type="text"
+                            name="company"
+                            placeholder="Your Company Inc."
+                            value={formData.company}
+                            onChange={handleChange}
+                            required
+                            className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 h-12 rounded-lg transition-all duration-200 hover:bg-white/15"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-gray-300 block">Website URL</label>
+                          <Input
+                            type="url"
+                            name="website"
+                            placeholder="https://yourcompany.com"
+                            value={formData.website}
+                            onChange={handleChange}
+                            className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 h-12 rounded-lg transition-all duration-200 hover:bg-white/15"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium text-gray-300 block">WhatsApp Number *</label>
+                          <Input
+                            type="tel"
+                            name="phone"
+                            placeholder="+1 (555) 123-4567"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            required
+                            className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 h-12 rounded-lg transition-all duration-200 hover:bg-white/15"
+                          />
+                        </div>
+
+                        <Button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white disabled:opacity-50 text-lg py-6 font-semibold rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
+                        >
+                          {isSubmitting ? (
+                            <div className="flex items-center justify-center gap-2">
+                              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                              <span>Sending your request...</span>
+                            </div>
+                          ) : (
+                            <div className="flex items-center justify-center gap-2">
+                              <span>🚀</span>
+                              <span>Get Custom Omnostock Solution</span>
+                            </div>
+                          )}
+                        </Button>
+                      </form>
+
+                      {/* Error Display */}
+                      {error && (
+                        <div className="p-4 bg-red-900/30 border border-red-700/50 rounded-lg text-red-200 backdrop-blur-sm">
+                          <div className="flex items-center gap-2">
+                            <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                            <span>{error}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Security Note */}
+                      <div className="text-center text-gray-400 text-sm">
+                        <div className="flex items-center justify-center gap-2">
+                          <Shield className="w-4 h-4" />
+                          <span>Your information is encrypted and secure</span>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-2xl font-semibold text-white mb-2">Thanks for Your Interest!</h3>
-                    <p className="text-gray-300 mb-6">We'll be in touch within 24 hours to discuss your custom Omnostock solution.</p>
-                    <Card className="bg-white/5 border-white/10">
-                      <CardContent className="p-4">
-                        <p className="text-sm text-gray-400">Blackroot Labs — where experimental AI becomes your unfair advantage.</p>
-                      </CardContent>
-                    </Card>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+                  ) : (
+                    <div className="text-center py-8">
+                      <div className="relative mb-6">
+                        <div className="w-20 h-20 mx-auto bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                          <CheckCircle className="w-10 h-10 text-white" />
+                        </div>
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full animate-ping"></div>
+                      </div>
+                      
+                      <h3 className="text-3xl font-bold text-white mb-4">
+                        Request Received! 🎉
+                      </h3>
+                      
+                      <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                        Thank you for your interest in Omnostock. Our team will review your requirements 
+                        and get back to you within 24 hours with a custom solution proposal.
+                      </p>
+
+                      <div className="space-y-4">
+                        <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
+                          <CardContent className="p-6">
+                            <h4 className="text-white font-semibold mb-2">What happens next?</h4>
+                            <div className="space-y-2 text-gray-300 text-sm">
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                                <span>Technical consultation call (30 minutes)</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                <span>Custom solution architecture review</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <span>Implementation timeline & pricing</span>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="bg-white/5 border-white/10 backdrop-blur-sm">
+                          <CardContent className="p-4">
+                            <p className="text-sm text-gray-400">
+                              <strong className="text-white">Blackroot Labs</strong> — where experimental AI becomes your unfair advantage.
+                            </p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Social Proof Footer */}
+            <div className="text-center mt-16">
+              <p className="text-gray-400 text-sm mb-4">
+                Trusted by forward-thinking businesses across 12+ countries
+              </p>
+              <div className="flex justify-center items-center gap-8 opacity-60">
+                <div className="text-xs text-gray-500">Series A+ Operators</div>
+                <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                <div className="text-xs text-gray-500">Global Scale Experience</div>
+                <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
+                <div className="text-xs text-gray-500">Enterprise Security</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
