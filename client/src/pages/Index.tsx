@@ -269,61 +269,61 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {[
               {
-                icon: <Globe className="w-6 h-6" />,
+                icon: <Globe className="w-5 h-5" />,
                 title: "Real-Time Inventory Sync",
                 description: "Live syncing with Shopify, WooCommerce, or custom builds. Inventory stays accurate and up to date, always."
               },
               {
-                icon: <Package className="w-6 h-6" />,
-                title: "Offline Inventory Management",
+                icon: <Package className="w-5 h-5" />,
+                title: "Offline Inventory Management", 
                 description: "Supports offline catalogs for pop-ups, warehouses, or retail outlets with the same accuracy and intelligence."
               },
               {
-                icon: <MapPin className="w-6 h-6" />,
+                icon: <MapPin className="w-5 h-5" />,
                 title: "Stock Transfer Between Locations",
                 description: "Easily move inventory across warehouses or retail locations. Every transfer is logged, auditable, and tracked."
               },
               {
-                icon: <Cpu className="w-6 h-6" />,
+                icon: <Cpu className="w-5 h-5" />,
                 title: "Record Offline Sales",
                 description: "Log sales from in-person events, WhatsApp, or walk-ins. Keep data complete across all touchpoints."
               },
               {
-                icon: <BarChart3 className="w-6 h-6" />,
+                icon: <BarChart3 className="w-5 h-5" />,
                 title: "Advanced Location Reports",
                 description: "Get granular insights per outlet or warehouse. See what's selling in Lagos vs. London at a glance."
               },
               {
-                icon: <Brain className="w-6 h-6" />,
+                icon: <Brain className="w-5 h-5" />,
                 title: "Smart Reorder Recommendations",
                 description: "AI analyzes sales history, seasonality, and supply timelines to recommend restocks before you need them."
               },
               {
-                icon: <FileText className="w-6 h-6" />,
+                icon: <FileText className="w-5 h-5" />,
                 title: "Auto-Purchase Order Generator",
                 description: "Converts low-stock alerts into supplier-ready purchase orders. Send via WhatsApp, email, or export instantly."
               },
               {
-                icon: <TrendingUp className="w-6 h-6" />,
+                icon: <TrendingUp className="w-5 h-5" />,
                 title: "Product Velocity Analytics",
                 description: "Discover fastest-moving SKUs, deadstock items, and hidden performers. Perfect for refining strategy."
               },
               {
-                icon: <Users className="w-6 h-6" />,
+                icon: <Users className="w-5 h-5" />,
                 title: "Multi-User Access & Roles",
                 description: "From inventory managers to sales assistants, define exactly who can do what and prevent errors."
               }
             ].map((feature, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow border-gray-200">
+              <Card key={index} className="group hover:shadow-md transition-all duration-300 border-gray-100 hover:border-gray-200">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 text-gray-700">
+                  <div className="w-10 h-10 bg-gray-50 group-hover:bg-gray-100 rounded-lg flex items-center justify-center mb-4 text-gray-800 transition-colors duration-300">
                     {feature.icon}
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{feature.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
