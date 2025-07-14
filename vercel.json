@@ -1,25 +1,16 @@
 {
-  "builds": [
+  "rewrites": [
     {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/client/dist/$1"
+      "source": "/(.*)",
+      "destination": "/client/dist/$1"
     }
   ],
-  "outputDirectory": "client/dist",
   "buildCommand": "cd client && npm install && npm run build",
+  "outputDirectory": "client/dist",
   "functions": {
     "api/omnostock-leads.js": {
       "maxDuration": 10
