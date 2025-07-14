@@ -25,17 +25,25 @@ const Index = () => {
     setError('');
 
     try {
-      const { error } = await supabase
-        .from('omnostock_leads')
-        .insert([{
+      const response = await fetch('/api/omnostock-leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           company: formData.company,
           website: formData.website || null,
           phone: formData.phone
-        }]);
+        })
+      });
 
-      if (error) throw error;
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
 
       setIsSubmitted(true);
     } catch (error: any) {
@@ -43,7 +51,7 @@ const Index = () => {
       if (error.message && error.message.includes('duplicate')) {
         setError('This email is already in our system. We\'ll be in touch soon.');
       } else {
-        setError('Something went wrong. Please try again.');
+        setError(error.message || 'Something went wrong. Please try again.');
       }
     } finally {
       setIsSubmitting(false);

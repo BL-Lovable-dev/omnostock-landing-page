@@ -40,17 +40,11 @@ export const insertWaitlistSubscriberSchema = createInsertSchema(waitlistSubscri
   mailchimpId: true,
 });
 
-export const insertOmnistockLeadSchema = createInsertSchema(omnistockLeads).pick({
-  name: true,
-  email: true,
-  company: true,
-  website: true,
-  phone: true,
-}).extend({
+export const insertOmnistockLeadSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Please enter a valid email address"),
   company: z.string().min(1, "Company name is required"),
-  website: z.string().url("Please enter a valid website URL").optional().or(z.literal("")),
+  website: z.string().optional().or(z.literal("")),
   phone: z.string().min(1, "Phone number is required"),
 });
 
