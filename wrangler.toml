@@ -1,0 +1,25 @@
+name = "omnostock-sales-page"
+compatibility_date = "2025-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+[build]
+command = "npm run build"
+cwd = "."
+watch_dir = "client"
+
+[build.upload]
+format = "service-worker"
+
+# Environment variables for production
+[env.production]
+compatibility_date = "2025-01-15"
+
+# Database binding (you'll need to set this up)
+# [[env.production.d1_databases]]
+# binding = "DB"
+# database_name = "omnostock-db"
+# database_id = "your-database-id"
+
+# For external database, you can use vars:
+# [env.production.vars]
+# DATABASE_URL = "your-postgres-url"
