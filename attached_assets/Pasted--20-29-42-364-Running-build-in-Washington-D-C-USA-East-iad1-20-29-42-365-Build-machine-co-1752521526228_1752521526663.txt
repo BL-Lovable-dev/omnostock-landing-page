@@ -1,0 +1,55 @@
+[20:29:42.364] Running build in Washington, D.C., USA (East) – iad1
+[20:29:42.365] Build machine configuration: 2 cores, 8 GB
+[20:29:42.379] Cloning github.com/BL-Lovable-dev/omnostock-landing-page (Branch: main, Commit: 4334e2b)
+[20:29:42.730] Previous build caches not available
+[20:29:42.957] Cloning completed: 578.000ms
+[20:29:45.135] Running "vercel build"
+[20:29:45.623] Vercel CLI 44.3.0
+[20:29:46.870] Installing dependencies...
+[20:29:50.712] npm warn deprecated path-match@1.2.4: This package is archived and no longer maintained. For support, visit https://github.com/expressjs/express/discussions
+[20:29:52.890] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[20:29:52.931] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[20:29:59.297] 
+[20:29:59.299] added 670 packages in 12s
+[20:29:59.299] 
+[20:29:59.299] 75 packages are looking for funding
+[20:29:59.300]   run `npm fund` for details
+[20:30:10.709] 
+[20:30:10.710] added 61 packages, and audited 62 packages in 11s
+[20:30:10.710] 
+[20:30:10.710] 7 packages are looking for funding
+[20:30:10.711]   run `npm fund` for details
+[20:30:10.718] 
+[20:30:10.718] 2 moderate severity vulnerabilities
+[20:30:10.718] 
+[20:30:10.718] To address all issues (including breaking changes), run:
+[20:30:10.719]   npm audit fix --force
+[20:30:10.719] 
+[20:30:10.719] Run `npm audit` for details.
+[20:30:10.842] 
+[20:30:10.842] > waitlist-client@1.0.0 build
+[20:30:10.843] > vite build --outDir ../dist/public
+[20:30:10.843] 
+[20:30:11.370] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[20:30:11.371] [33m
+[20:30:11.372] [1m(!)[22m outDir [37m[2m/vercel/path0/dist/public[22m[33m is not inside project root and will not be emptied.
+[20:30:11.372] Use --emptyOutDir to override.
+[20:30:11.372] [39m
+[20:30:11.423] transforming...
+[20:30:11.717] [32m✓[39m 4 modules transformed.
+[20:30:11.723] [31mx[39m Build failed in 323ms
+[20:30:11.723] [31merror during build:
+[20:30:11.723] [31m[vite]: Rollup failed to resolve import "@/components/ui/toaster" from "/vercel/path0/client/src/App.tsx".
+[20:30:11.724] This is most likely unintended because it can break your application at runtime.
+[20:30:11.724] If you do want to externalize this module explicitly add it to
+[20:30:11.724] `build.rollupOptions.external`[31m
+[20:30:11.724]     at viteWarn (file:///vercel/path0/client/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:65839:17)
+[20:30:11.724]     at onRollupWarning (file:///vercel/path0/client/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:65871:5)
+[20:30:11.725]     at onwarn (file:///vercel/path0/client/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:65534:7)
+[20:30:11.725]     at file:///vercel/path0/client/node_modules/rollup/dist/es/shared/node-entry.js:20820:13
+[20:30:11.725]     at Object.logger [as onLog] (file:///vercel/path0/client/node_modules/rollup/dist/es/shared/node-entry.js:22686:9)
+[20:30:11.725]     at ModuleLoader.handleInvalidResolvedId (file:///vercel/path0/client/node_modules/rollup/dist/es/shared/node-entry.js:21432:26)
+[20:30:11.725]     at file:///vercel/path0/client/node_modules/rollup/dist/es/shared/node-entry.js:21390:26[39m
+[20:30:11.739] Error: Command "cd client && npm install && npm run build" exited with 1
+[20:30:11.988] 
+[20:30:14.796] Exiting build container
