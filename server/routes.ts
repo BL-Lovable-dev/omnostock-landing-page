@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { EmailService } from "./services/email";
-import { insertWaitlistSubscriberSchema } from "@shared/schema";
+import { insertWaitlistSubscriberSchema, insertOmnistockLeadSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -181,7 +181,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Omnostock leads endpoint
+  app.post("/api/omnostock-leads", async (req, res) => {
+    try {
+      // Validate request body
+      const validatedData = insertOmnistockLeadSchema.parse(req.body);
+      
+      // Store in database
+      const lead = await storage.createOmnistockLead(validatedData);
 
+      res.status(201).json({
+        success: true,
+        message: "Lead submitted successfully!",
+        lead: {
+          id: lead.id,
+          name: lead.name,
+          email: lead.email,
+          company: lead.company,
+          createdAt: lead.createdAt
+        }
+      });
+
+    } catch (error: any) {
+      console.error("Omnostock lead submission error:", error);
+
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid form data",
+          errors: error.errors
+        });
+      }
+
+      res.status(500).json({
+        success: false,
+        message: "Something went wrong. Please try again."
+      });
+    }
+  });
 
   const httpServer = createServer(app);
 

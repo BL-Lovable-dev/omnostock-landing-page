@@ -1,4 +1,4 @@
-import { users, waitlistSubscribers, type User, type InsertUser, type WaitlistSubscriber, type InsertWaitlistSubscriber } from "@shared/schema";
+import { users, waitlistSubscribers, omnistockLeads, type User, type InsertUser, type WaitlistSubscriber, type InsertWaitlistSubscriber, type OmnistockLead, type InsertOmnistockLead } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
@@ -12,6 +12,9 @@ export interface IStorage {
   getWaitlistSubscriberByEmail(email: string): Promise<WaitlistSubscriber | undefined>;
   updateWaitlistSubscriber(email: string, updates: Partial<WaitlistSubscriber>): Promise<WaitlistSubscriber>;
   getAllWaitlistSubscribers(): Promise<WaitlistSubscriber[]>;
+
+  // Omnostock leads methods
+  createOmnistockLead(lead: InsertOmnistockLead): Promise<OmnistockLead>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -60,6 +63,14 @@ export class DatabaseStorage implements IStorage {
 
   async getAllWaitlistSubscribers(): Promise<WaitlistSubscriber[]> {
     return db.select().from(waitlistSubscribers).where(eq(waitlistSubscribers.isActive, true));
+  }
+
+  async createOmnistockLead(lead: InsertOmnistockLead): Promise<OmnistockLead> {
+    const [omnistockLead] = await db
+      .insert(omnistockLeads)
+      .values(lead)
+      .returning();
+    return omnistockLead;
   }
 }
 
