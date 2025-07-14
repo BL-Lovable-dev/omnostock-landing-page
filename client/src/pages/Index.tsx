@@ -80,12 +80,12 @@ const Index = () => {
                 <div className="text-xs text-gray-500">by Blackroot Labs</div>
               </div>
             </div>
-            <div className="hidden md:flex space-x-6">
-              <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
-              <a href="#why-different" className="text-gray-600 hover:text-gray-900 transition-colors">Why Different</a>
-              <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+            <div className="hidden md:flex space-x-8">
+              <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Features</a>
+              <a href="#why-different" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Why Different</a>
+              <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Contact</a>
             </div>
-            <Button onClick={scrollToContact} className="bg-orange-500 hover:bg-orange-600 text-white">
+            <Button onClick={scrollToContact} className="bg-gray-900 hover:bg-gray-800 text-white font-medium px-6 py-2 rounded-lg transition-all duration-200">
               Get Custom Solution
             </Button>
           </div>
@@ -93,46 +93,46 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-white">
+      <section className="pt-32 pb-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="w-20 h-20 mx-auto bg-gray-900 rounded-2xl flex items-center justify-center mb-8">
+            <div className="w-20 h-20 mx-auto bg-gray-900 rounded-2xl flex items-center justify-center mb-10 shadow-lg">
               <Package className="w-10 h-10 text-white" />
             </div>
             
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-sm font-medium mb-8">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gray-50 border border-gray-200 text-gray-700 text-sm font-medium mb-10">
               <span className="relative flex h-2 w-2 mr-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-gray-600"></span>
               </span>
               Limited Custom Implementations Available
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
               Stop Losing Money to<br />
-              <span className="text-orange-500">Inventory Chaos</span>
+              <span className="text-gray-700">Inventory Chaos</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">
               The first inventory system built for hybrid commerce realities. Prevent costly stockouts, reduce deadstock, and scale confidently across all channels.
             </p>
             
-            <div className="flex items-center justify-center gap-8 mb-10 text-gray-600">
+            <div className="flex items-center justify-center gap-8 mb-12 text-gray-600">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
                 <span>Save 30-40% on inventory costs</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
                 <span>Prevent 95% of stockouts</span>
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
               <Button 
                 onClick={scrollToContact}
                 size="lg" 
-                className="bg-orange-500 hover:bg-orange-600 text-white text-lg px-8 py-6"
+                className="bg-gray-900 hover:bg-gray-800 text-white text-lg px-10 py-6 rounded-lg transition-all duration-200 shadow-lg"
               >
                 🚀 Get Custom Solution
               </Button>
@@ -140,23 +140,23 @@ const Index = () => {
                 onClick={scrollToFeatures}
                 variant="outline" 
                 size="lg" 
-                className="border-gray-300 text-gray-700 hover:bg-gray-50 text-lg px-8 py-6"
+                className="border-gray-300 text-gray-700 hover:bg-gray-50 text-lg px-10 py-6 rounded-lg transition-all duration-200"
               >
                 📋 See Features
               </Button>
             </div>
             
             {/* Key Stats */}
-            <div className="grid md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-12">
-              <div className="text-center">
+            <div className="grid md:grid-cols-3 gap-8 max-w-2xl mx-auto mb-16">
+              <div className="text-center p-6 bg-gray-50 rounded-lg">
                 <div className="text-3xl font-bold text-gray-900 mb-2">$2.3M</div>
                 <p className="text-sm text-gray-600">Inventory losses prevented in beta</p>
               </div>
-              <div className="text-center">
+              <div className="text-center p-6 bg-gray-50 rounded-lg">
                 <div className="text-3xl font-bold text-gray-900 mb-2">47%</div>
                 <p className="text-sm text-gray-600">Average cost reduction</p>
               </div>
-              <div className="text-center">
+              <div className="text-center p-6 bg-gray-50 rounded-lg">
                 <div className="text-3xl font-bold text-gray-900 mb-2">99.7%</div>
                 <p className="text-sm text-gray-600">Accuracy across 50+ SKUs</p>
               </div>
@@ -165,7 +165,7 @@ const Index = () => {
             {/* Beta Client Testimonial */}
             <div className="max-w-2xl mx-auto bg-gray-50 rounded-xl p-8 border border-gray-200">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center text-white font-bold">
+                <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center text-white font-bold">
                   M
                 </div>
                 <div>
@@ -342,12 +342,12 @@ const Index = () => {
               Omnostock gives growing commerce brands the kind of operational infrastructure only enterprise companies used to afford — but with the flexibility, intelligence, and affordability tailored for the modern market.
             </p>
             
-            <Card className="bg-orange-50 border-orange-200">
+            <Card className="bg-gray-100 border-gray-200">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-orange-800 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   One System. All Your Commerce.
                 </h3>
-                <p className="text-orange-700 text-lg">
+                <p className="text-gray-700 text-lg">
                   Whether you sell on your own website, through DMs, in a physical store, or across several warehouses — this is the one system that keeps your stock, team, and growth aligned.
                 </p>
               </CardContent>
@@ -360,10 +360,10 @@ const Index = () => {
       <section className="py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-red-900/30 border border-red-800/50 text-red-200 text-sm font-medium mb-8">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gray-800/50 border border-gray-700 text-gray-300 text-sm font-medium mb-8">
               <div className="relative flex h-2 w-2 mr-2">
-                <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></div>
-                <div className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></div>
+                <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gray-400 opacity-75"></div>
+                <div className="relative inline-flex rounded-full h-2 w-2 bg-gray-500"></div>
               </div>
               Only 3 slots available this quarter
             </div>
@@ -377,7 +377,7 @@ const Index = () => {
             
             <Card className="bg-white/5 backdrop-blur-lg border-white/10">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-4 text-orange-400">Custom Implementation</h3>
+                <h3 className="text-2xl font-bold mb-4 text-white">Custom Implementation</h3>
                 <p className="text-gray-300">
                   We build a version of Omnostock tailored for your business — or even create a more powerful version from scratch. This isn't one-size-fits-all software.
                 </p>
@@ -453,7 +453,7 @@ const Index = () => {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-orange-500 hover:bg-orange-600 text-white disabled:opacity-50 text-lg py-6"
+                        className="w-full bg-white hover:bg-gray-50 text-gray-900 disabled:opacity-50 text-lg py-6 font-medium transition-all duration-200"
                       >
                         {isSubmitting ? 'Sending...' : '🚀 Get Custom Omnostock Solution'}
                       </Button>
@@ -489,7 +489,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center">
                 <Package className="w-6 h-6 text-white" />
               </div>
               <div>
