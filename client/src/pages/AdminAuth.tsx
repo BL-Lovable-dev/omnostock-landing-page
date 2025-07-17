@@ -79,11 +79,7 @@ const AdminAuth = ({ onAuthenticated }: AdminAuthProps) => {
             </Button>
           </form>
           
-          <div className="mt-4 text-center">
-            <p className="text-xs text-gray-500">
-              Password: <code className="bg-gray-100 px-2 py-1 rounded">omnostock2025</code>
-            </p>
-          </div>
+
         </CardContent>
       </Card>
     </div>

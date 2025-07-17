@@ -17,6 +17,18 @@ const Index = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+  
+  // Separate states for early form
+  const [earlyFormData, setEarlyFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    website: '',
+    phone: ''
+  });
+  const [earlyIsSubmitting, setEarlyIsSubmitting] = useState(false);
+  const [earlyIsSubmitted, setEarlyIsSubmitted] = useState(false);
+  const [earlyError, setEarlyError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,8 +69,54 @@ const Index = () => {
     }
   };
 
+  const handleEarlySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setEarlyIsSubmitting(true);
+    setEarlyError('');
+
+    try {
+      const response = await fetch('/api/omnostock-leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: earlyFormData.name,
+          email: earlyFormData.email,
+          company: earlyFormData.company,
+          website: earlyFormData.website || null,
+          phone: earlyFormData.phone
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+
+      setEarlyIsSubmitted(true);
+    } catch (error: any) {
+      console.error('Early form submission error:', error);
+      if (error.message && error.message.includes('duplicate')) {
+        setEarlyError('This email is already in our system. We\'ll be in touch soon.');
+      } else {
+        setEarlyError(error.message || 'Something went wrong. Please try again.');
+      }
+    } finally {
+      setEarlyIsSubmitting(false);
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleEarlyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEarlyFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
@@ -208,15 +266,15 @@ const Index = () => {
             
             <Card className="bg-white shadow-lg border-0">
               <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleEarlySubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Input
                         type="text"
                         name="name"
                         placeholder="Your Name"
-                        value={formData.name}
-                        onChange={handleChange}
+                        value={earlyFormData.name}
+                        onChange={handleEarlyChange}
                         required
                         className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
                       />
@@ -226,8 +284,8 @@ const Index = () => {
                         type="email"
                         name="email"
                         placeholder="Email Address"
-                        value={formData.email}
-                        onChange={handleChange}
+                        value={earlyFormData.email}
+                        onChange={handleEarlyChange}
                         required
                         className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
                       />
@@ -240,8 +298,8 @@ const Index = () => {
                         type="text"
                         name="company"
                         placeholder="Company Name"
-                        value={formData.company}
-                        onChange={handleChange}
+                        value={earlyFormData.company}
+                        onChange={handleEarlyChange}
                         required
                         className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
                       />
@@ -251,8 +309,8 @@ const Index = () => {
                         type="text"
                         name="phone"
                         placeholder="Phone Number"
-                        value={formData.phone}
-                        onChange={handleChange}
+                        value={earlyFormData.phone}
+                        onChange={handleEarlyChange}
                         required
                         className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
                       />
@@ -264,28 +322,39 @@ const Index = () => {
                       type="text"
                       name="website"
                       placeholder="Website (optional)"
-                      value={formData.website}
-                      onChange={handleChange}
+                      value={earlyFormData.website}
+                      onChange={handleEarlyChange}
                       className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
                     />
                   </div>
                   
-                  {error && (
+                  {earlyError && (
                     <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 text-sm">
-                      {error}
+                      {earlyError}
+                    </div>
+                  )}
+                  
+                  {earlyIsSubmitted && (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-green-700 text-sm">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="w-5 h-5" />
+                        <span>Thank you! We've received your request and will contact you within 24 hours.</span>
+                      </div>
                     </div>
                   )}
                   
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-gray-900 hover:bg-gray-800 text-white text-lg py-6 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+                    disabled={earlyIsSubmitting || earlyIsSubmitted}
+                    className="w-full bg-gray-900 hover:bg-gray-800 text-white text-lg py-6 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50"
                   >
-                    {isSubmitting ? (
+                    {earlyIsSubmitting ? (
                       <div className="flex items-center justify-center gap-2">
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                         <span>Sending your request...</span>
                       </div>
+                    ) : earlyIsSubmitted ? (
+                      <span>✓ Request Sent</span>
                     ) : (
                       <span>Submit</span>
                     )}
