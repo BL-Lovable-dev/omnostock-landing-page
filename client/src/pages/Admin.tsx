@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Download, Phone, Mail, Globe, Building2, Calendar, Users } from 'lucide-react';
+import AdminAuth from './AdminAuth';
 
 interface Lead {
   id: number;
@@ -18,9 +19,18 @@ const Admin = () => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    fetchLeads();
+    // Check if user is already authenticated
+    const isAuth = sessionStorage.getItem('omnostock_admin_auth') === 'true';
+    setIsAuthenticated(isAuth);
+    
+    if (isAuth) {
+      fetchLeads();
+    } else {
+      setLoading(false);
+    }
   }, []);
 
   const fetchLeads = async () => {
@@ -79,6 +89,16 @@ const Admin = () => {
     window.location.href = '/';
   };
 
+  const handleAuthenticated = () => {
+    setIsAuthenticated(true);
+    fetchLeads();
+  };
+
+  // Show auth screen if not authenticated
+  if (!isAuthenticated) {
+    return <AdminAuth onAuthenticated={handleAuthenticated} />;
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -106,26 +126,26 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-200">
+    <div className="min-h-screen bg-white">
+      <div className="bg-gray-900 text-white">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" onClick={goBack} className="flex items-center gap-2">
+              <Button variant="ghost" onClick={goBack} className="flex items-center gap-2 text-white hover:bg-gray-800">
                 <ArrowLeft className="w-4 h-4" />
                 Back to Site
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Omnostock Leads</h1>
-                <p className="text-gray-600">Manage your form submissions</p>
+                <h1 className="text-2xl font-bold text-white">Omnostock Leads</h1>
+                <p className="text-gray-300">Manage your form submissions</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <Badge variant="secondary" className="flex items-center gap-2">
+              <Badge className="flex items-center gap-2 bg-gray-800 text-white">
                 <Users className="w-4 h-4" />
                 {leads.length} Total Leads
               </Badge>
-              <Button onClick={exportToCSV} className="flex items-center gap-2">
+              <Button onClick={exportToCSV} className="flex items-center gap-2 bg-white text-gray-900 hover:bg-gray-100">
                 <Download className="w-4 h-4" />
                 Export CSV
               </Button>
@@ -136,57 +156,57 @@ const Admin = () => {
 
       <div className="container mx-auto px-4 py-8">
         {leads.length === 0 ? (
-          <Card>
+          <Card className="border-2 border-gray-200">
             <CardContent className="p-12 text-center">
-              <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">No leads yet</h3>
-              <p className="text-gray-600">Form submissions will appear here once visitors start filling out your contact form.</p>
+              <p className="text-gray-700">Form submissions will appear here once visitors start filling out your contact form.</p>
             </CardContent>
           </Card>
         ) : (
           <div className="grid gap-6">
             {leads.map((lead) => (
-              <Card key={lead.id} className="hover:shadow-md transition-shadow">
-                <CardHeader className="pb-3">
+              <Card key={lead.id} className="border-2 border-gray-200 hover:border-gray-300 transition-colors bg-gray-50">
+                <CardHeader className="pb-3 bg-white">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-xl text-gray-900">{lead.name}</CardTitle>
-                    <Badge variant="outline" className="flex items-center gap-1">
+                    <CardTitle className="text-xl text-gray-900 font-bold">{lead.name}</CardTitle>
+                    <Badge className="flex items-center gap-1 bg-gray-900 text-white">
                       <Calendar className="w-3 h-3" />
                       {formatDate(lead.created_at)}
                     </Badge>
                   </div>
                 </CardHeader>
-                <CardContent className="pt-0">
+                <CardContent className="pt-4">
                   <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-gray-500" />
-                      <a href={`mailto:${lead.email}`} className="text-blue-600 hover:text-blue-800 font-medium">
+                      <Mail className="w-4 h-4 text-gray-900" />
+                      <a href={`mailto:${lead.email}`} className="text-blue-700 hover:text-blue-900 font-medium underline">
                         {lead.email}
                       </a>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Building2 className="w-4 h-4 text-gray-500" />
-                      <span className="text-gray-700">{lead.company}</span>
+                      <Building2 className="w-4 h-4 text-gray-900" />
+                      <span className="text-gray-900 font-medium">{lead.company}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Phone className="w-4 h-4 text-gray-500" />
-                      <a href={`tel:${lead.phone}`} className="text-blue-600 hover:text-blue-800 font-medium">
+                      <Phone className="w-4 h-4 text-gray-900" />
+                      <a href={`tel:${lead.phone}`} className="text-blue-700 hover:text-blue-900 font-medium underline">
                         {lead.phone}
                       </a>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Globe className="w-4 h-4 text-gray-500" />
+                      <Globe className="w-4 h-4 text-gray-900" />
                       {lead.website ? (
                         <a 
                           href={lead.website.startsWith('http') ? lead.website : `https://${lead.website}`} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-800 font-medium"
+                          className="text-blue-700 hover:text-blue-900 font-medium underline"
                         >
                           {lead.website}
                         </a>
                       ) : (
-                        <span className="text-gray-400">No website</span>
+                        <span className="text-gray-600">No website</span>
                       )}
                     </div>
                   </div>
