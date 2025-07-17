@@ -2,16 +2,18 @@
 
 ## What I've Created
 
-### 1. Serverless API Function
+### 1. Serverless API Functions
 - `api/omnostock-leads.js` - Converts your Express route to Vercel serverless function
+- `api/admin/leads.js` - Admin dashboard API for retrieving leads
 - Handles form submissions with proper validation
 - Includes connection pooling for PostgreSQL
 - CORS enabled for frontend communication
 
 ### 2. Vercel Configuration
-- `vercel.json` - Routes API calls and serves React frontend
+- `vercel.json` - Routes API calls and serves React frontend with SPA routing support
 - `package-vercel.json` - Dependencies for Vercel deployment
 - Frontend builds automatically from client folder
+- Client-side routing configured for `/admin` page support
 
 ### 3. Database Setup
 - Uses same PostgreSQL database as current setup
@@ -62,15 +64,51 @@ CREATE TABLE omnostock_leads (
 ```
 
 ## Testing
-- Frontend: Deployed as static React app
-- API: Available at `/api/omnostock-leads`
+- Frontend: Deployed as static React app with SPA routing
+- API: Available at `/api/omnostock-leads` and `/api/admin/leads`
 - Database: Same PostgreSQL setup
 - Form: Works exactly like current version
+- Admin: Available at `/admin` with password protection
 
 ## Rollback Plan
 - Keep current Render setup active
 - Can switch back instantly if needed
 - No data loss during migration
+
+## Recent Updates (July 17, 2025)
+
+### Admin Page Fix
+- Fixed `/admin` route 404 errors with proper rewrite configuration
+- Added `api/admin/leads.js` serverless function for admin dashboard
+- Implemented client-side routing support for SPA
+- Enhanced form separation with independent confirmation states
+- Removed password display from admin login for security
+
+### Vercel Configuration Updates
+```json
+{
+  "buildCommand": "cd client && npm install && npm run build",
+  "outputDirectory": "client/dist",
+  "functions": {
+    "api/omnostock-leads.js": {
+      "maxDuration": 10
+    },
+    "api/admin/leads.js": {
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+```
 
 ## Benefits
 - No sleep timeouts
