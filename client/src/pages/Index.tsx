@@ -414,6 +414,58 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Demo Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                See Omnostock in Action
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Experience how Omnostock transforms inventory management across channels. This interactive demo shows real features you'll use daily.
+              </p>
+            </div>
+            
+            <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
+              <div style={{
+                position: 'relative',
+                boxSizing: 'content-box',
+                maxHeight: '80vh',
+                width: '100%',
+                aspectRatio: '2.000720461095101',
+                padding: '40px 0 40px 0'
+              }}>
+                <iframe
+                  src="https://app.supademo.com/embed/cmc850toh0netifobgllhcbld?v_email=EMAIL&embed_v=2"
+                  loading="lazy"
+                  title="OmnoStock Demo"
+                  allow="clipboard-write"
+                  frameBorder="0"
+                  webkitallowfullscreen="true"
+                  mozallowfullscreen="true"
+                  allowFullScreen
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '12px'
+                  }}
+                />
+              </div>
+            </div>
+            
+            <div className="text-center mt-8">
+              <p className="text-gray-500 text-sm">
+                Interactive demo • Click through to explore features • No signup required
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Not SaaS Section */}
       <section className="py-20 bg-gray-900 text-white">
         <div className="container mx-auto px-4">
