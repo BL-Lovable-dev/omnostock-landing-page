@@ -72,6 +72,10 @@ const Index = () => {
     document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToDemo = () => {
+    document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -89,6 +93,7 @@ const Index = () => {
             </div>
             <div className="hidden md:flex space-x-8">
               <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Features</a>
+              <button onClick={scrollToDemo} className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Demo</button>
               <a href="#why-different" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Why Different</a>
               <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Contact</a>
             </div>
@@ -415,7 +420,7 @@ const Index = () => {
       </section>
 
       {/* Demo Section */}
-      <section className="py-20 bg-white">
+      <section id="demo" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
