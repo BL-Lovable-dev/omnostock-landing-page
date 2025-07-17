@@ -188,6 +188,110 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Early Contact Form */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Ready to Transform Your Inventory?
+              </h2>
+              <p className="text-lg text-gray-600">
+                Complete the form, and we'll reach out to discuss your custom business needs
+              </p>
+            </div>
+            
+            <Card className="bg-white shadow-lg border-0">
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="email"
+                        name="email"
+                        placeholder="Email Address"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Input
+                        type="text"
+                        name="company"
+                        placeholder="Company Name"
+                        value={formData.company}
+                        onChange={handleChange}
+                        required
+                        className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="text"
+                        name="phone"
+                        placeholder="Phone Number"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                        className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Input
+                      type="text"
+                      name="website"
+                      placeholder="Website (optional)"
+                      value={formData.website}
+                      onChange={handleChange}
+                      className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                    />
+                  </div>
+                  
+                  {error && (
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 text-sm">
+                      {error}
+                    </div>
+                  )}
+                  
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gray-900 hover:bg-gray-800 text-white text-lg py-6 font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        <span>Sending your request...</span>
+                      </div>
+                    ) : (
+                      <span>Submit</span>
+                    )}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Why We Built This */}
       <section id="why-different" className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -409,7 +513,7 @@ const Index = () => {
                           Get Your Custom Solution
                         </h3>
                         <p className="text-gray-300">
-                          Tell us about your business and we'll craft the perfect Omnostock implementation
+                          Complete the form, and we'll reach out to discuss your custom business needs
                         </p>
                       </div>
 
@@ -492,10 +596,7 @@ const Index = () => {
                               <span>Sending your request...</span>
                             </div>
                           ) : (
-                            <div className="flex items-center justify-center gap-2">
-                              <span>🚀</span>
-                              <span>Get Custom Omnostock Solution</span>
-                            </div>
+                            <span>Submit</span>
                           )}
                         </Button>
                       </form>
