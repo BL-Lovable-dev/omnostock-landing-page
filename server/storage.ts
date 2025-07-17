@@ -1,6 +1,6 @@
 import { users, waitlistSubscribers, omnistockLeads, type User, type InsertUser, type WaitlistSubscriber, type InsertWaitlistSubscriber, type OmnistockLead, type InsertOmnistockLead } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -15,6 +15,7 @@ export interface IStorage {
 
   // Omnostock leads methods
   createOmnistockLead(lead: InsertOmnistockLead): Promise<OmnistockLead>;
+  getAllOmnistockLeads(): Promise<OmnistockLead[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -71,6 +72,10 @@ export class DatabaseStorage implements IStorage {
       .values(lead)
       .returning();
     return omnistockLead;
+  }
+
+  async getAllOmnistockLeads(): Promise<OmnistockLead[]> {
+    return db.select().from(omnistockLeads).orderBy(desc(omnistockLeads.createdAt));
   }
 }
 

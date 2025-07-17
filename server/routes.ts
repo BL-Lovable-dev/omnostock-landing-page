@@ -220,6 +220,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin endpoint to get all Omnostock leads
+  app.get("/api/admin/leads", async (req, res) => {
+    try {
+      const leads = await storage.getAllOmnistockLeads();
+
+      res.json({
+        success: true,
+        leads: leads,
+        total: leads.length
+      });
+
+    } catch (error) {
+      console.error("Admin leads fetch error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch leads. Please try again."
+      });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
