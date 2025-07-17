@@ -50,7 +50,12 @@ const Index = () => {
         })
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        throw new Error('Server error - please try again later');
+      }
 
       if (!response.ok) {
         throw new Error(data.message || 'Something went wrong');
@@ -89,7 +94,12 @@ const Index = () => {
         })
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        throw new Error('Server error - please try again later');
+      }
 
       if (!response.ok) {
         throw new Error(data.message || 'Something went wrong');
@@ -276,7 +286,7 @@ const Index = () => {
                         value={earlyFormData.name}
                         onChange={handleEarlyChange}
                         required
-                        className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                        className="h-12 bg-white border-gray-300 focus:border-gray-500 focus:ring-0 text-gray-900 placeholder:text-gray-500"
                       />
                     </div>
                     <div>
@@ -287,7 +297,7 @@ const Index = () => {
                         value={earlyFormData.email}
                         onChange={handleEarlyChange}
                         required
-                        className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                        className="h-12 bg-white border-gray-300 focus:border-gray-500 focus:ring-0 text-gray-900 placeholder:text-gray-500"
                       />
                     </div>
                   </div>
@@ -301,7 +311,7 @@ const Index = () => {
                         value={earlyFormData.company}
                         onChange={handleEarlyChange}
                         required
-                        className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                        className="h-12 bg-white border-gray-300 focus:border-gray-500 focus:ring-0 text-gray-900 placeholder:text-gray-500"
                       />
                     </div>
                     <div>
@@ -312,7 +322,7 @@ const Index = () => {
                         value={earlyFormData.phone}
                         onChange={handleEarlyChange}
                         required
-                        className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                        className="h-12 bg-white border-gray-300 focus:border-gray-500 focus:ring-0 text-gray-900 placeholder:text-gray-500"
                       />
                     </div>
                   </div>
@@ -324,7 +334,7 @@ const Index = () => {
                       placeholder="Website (optional)"
                       value={earlyFormData.website}
                       onChange={handleEarlyChange}
-                      className="h-12 bg-gray-50 border-gray-200 focus:border-gray-400 focus:ring-0"
+                      className="h-12 bg-white border-gray-300 focus:border-gray-500 focus:ring-0 text-gray-900 placeholder:text-gray-500"
                     />
                   </div>
                   

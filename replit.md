@@ -110,6 +110,20 @@ The system is designed to be deployment-flexible, with configurations for variou
 
 ## Recent Changes
 
+### July 17, 2025 - Production Fixes
+- Fixed form visibility issues with improved placeholder text styling
+- Resolved JSON parsing errors by standardizing API functions to use Neon serverless
+- Enhanced error handling for better user experience
+- Added Content-Type headers to ensure proper JSON responses
+- Improved form validation and error messaging
+
+### July 17, 2025 - Admin Page Fix
+- Fixed `/admin` route 404 errors with proper rewrite configuration
+- Added `api/admin/leads.js` serverless function for admin dashboard
+- Implemented client-side routing support for SPA
+- Enhanced form separation with independent confirmation states
+- Removed password display from admin login for security
+
 ### July 14, 2025 - Vercel Deployment Success
 - Successfully deployed Omnostock sales page to Vercel
 - Resolved build configuration issues (toaster imports, CSS compilation)
