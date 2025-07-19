@@ -72,19 +72,23 @@ const Index = () => {
     setError('');
 
     try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        website: processWebsiteUrl(formData.website) || null,
+        phone: formData.phone,
+        storeTypes: formData.storeTypes
+      };
+      
+      console.log('Frontend sending payload:', payload);
+      
       const response = await fetch('/api/omnostock-leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          website: processWebsiteUrl(formData.website) || null,
-          phone: formData.phone,
-          storeTypes: formData.storeTypes
-        })
+        body: JSON.stringify(payload)
       });
 
       let data;
