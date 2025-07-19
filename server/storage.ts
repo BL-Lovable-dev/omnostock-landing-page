@@ -82,8 +82,14 @@ export class DatabaseStorage implements IStorage {
     return omnistockLead;
   }
 
-  async getAllOmnistockLeads(): Promise<OmnistockLead[]> {
-    return db.select().from(omnistockLeads).orderBy(desc(omnistockLeads.createdAt));
+  async getAllOmnistockLeads(): Promise<(OmnistockLead & { storeTypes: string[] })[]> {
+    const leads = await db.select().from(omnistockLeads).orderBy(desc(omnistockLeads.createdAt));
+    
+    // Convert comma-separated string back to array for frontend consumption
+    return leads.map(lead => ({
+      ...lead,
+      storeTypes: lead.storeTypes ? lead.storeTypes.split(', ').filter(s => s.trim()) : []
+    }));
   }
 }
 

@@ -37,7 +37,7 @@ export default async function handler(req, res) {
       company: lead.company,
       website: lead.website,
       phone: lead.phone,
-      storeTypes: lead.store_types || [],
+      storeTypes: lead.store_types ? lead.store_types.split(', ').filter(s => s.trim()) : [],
       created_at: lead.created_at
     }));
 
