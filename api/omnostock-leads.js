@@ -11,7 +11,7 @@ const insertOmnistockLeadSchema = z.object({
   company: z.string().min(1, "Company name is required"),
   website: z.string().optional().or(z.literal("")),
   phone: z.string().min(1, "Phone number is required"),
-  storeTypes: z.array(z.string()).optional().default([])
+  storeTypes: z.array(z.string()).default([])
 });
 
 export default async function handler(req, res) {
@@ -42,14 +42,21 @@ export default async function handler(req, res) {
     try {
       // Validate request body
       const validatedData = insertOmnistockLeadSchema.parse(req.body);
+      console.log('Received data:', JSON.stringify(validatedData, null, 2));
       
       // Insert lead into database using Neon serverless
+      // Use JSONB for store types which is more compatible with Neon
+      const storeTypesArray = validatedData.storeTypes || [];
+      const storeTypesJson = JSON.stringify(storeTypesArray);
+      console.log('Store types JSON:', storeTypesJson);
+      
       const result = await sql`
         INSERT INTO omnostock_leads (name, email, company, website, phone, store_types, created_at)
         VALUES (${validatedData.name}, ${validatedData.email}, ${validatedData.company}, 
-                ${validatedData.website || null}, ${validatedData.phone}, ${validatedData.storeTypes || []}, NOW())
+                ${validatedData.website || null}, ${validatedData.phone}, ${storeTypesJson}::jsonb, NOW())
         RETURNING id, name, email, company, store_types, created_at
       `;
+      console.log('Database result:', result);
 
       const lead = result[0];
 
