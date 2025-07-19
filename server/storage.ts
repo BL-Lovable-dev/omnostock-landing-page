@@ -67,9 +67,17 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createOmnistockLead(lead: InsertOmnistockLead): Promise<OmnistockLead> {
+    // Convert storeTypes array to comma-separated string for storage
+    const storeTypesString = lead.storeTypes && lead.storeTypes.length > 0 
+      ? lead.storeTypes.join(', ') 
+      : null;
+    
     const [omnistockLead] = await db
       .insert(omnistockLeads)
-      .values(lead)
+      .values({
+        ...lead,
+        storeTypes: storeTypesString
+      })
       .returning();
     return omnistockLead;
   }
