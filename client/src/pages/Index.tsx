@@ -291,11 +291,11 @@ const Index = () => {
             <div className="max-w-2xl mx-auto bg-gray-50 rounded-xl p-8 border border-gray-200">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center text-white font-bold">
-                  M
+                  F
                 </div>
                 <div>
-                  <div className="text-gray-900 font-semibold">Marcus Chen</div>
-                  <div className="text-gray-500 text-sm">COO, TechFashion Co.</div>
+                  <div className="text-gray-900 font-semibold">Faith</div>
+                  <div className="text-gray-500 text-sm">CEO, Floxyluxe Limited</div>
                 </div>
               </div>
               <p className="text-gray-700 italic">

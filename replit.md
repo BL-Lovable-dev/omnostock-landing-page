@@ -124,6 +124,7 @@ The system is designed to be deployment-flexible, with configurations for variou
 - Updated admin dashboard to properly display store types as badges with comma-separated parsing
 - Enhanced scrollbar visibility with custom black styling for better user experience
 - Store types now save correctly as comma-separated text and display as arrays in admin interface
+- Updated testimonial to Faith, CEO of Floxyluxe Limited (health & fitness brand, Germany)
 
 ### July 17, 2025 - Admin Page Fix
 - Fixed `/admin` route 404 errors with proper rewrite configuration
