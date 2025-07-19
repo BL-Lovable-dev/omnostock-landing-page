@@ -40,20 +40,24 @@ export default async function handler(req, res) {
     }
 
     try {
+      // Log raw request body first
+      console.log('Raw request body:', JSON.stringify(req.body, null, 2));
+      
       // Validate request body
       const validatedData = insertOmnistockLeadSchema.parse(req.body);
-      console.log('Received data:', JSON.stringify(validatedData, null, 2));
+      console.log('Validated data:', JSON.stringify(validatedData, null, 2));
       
       // Insert lead into database using Neon serverless
-      // Use JSONB for store types which is more compatible with Neon
+      // Use simple text storage for store types  
       const storeTypesArray = validatedData.storeTypes || [];
-      const storeTypesJson = JSON.stringify(storeTypesArray);
-      console.log('Store types JSON:', storeTypesJson);
+      const storeTypesText = storeTypesArray.length > 0 ? storeTypesArray.join(', ') : null;
+      console.log('Store types array:', storeTypesArray);
+      console.log('Store types text:', storeTypesText);
       
       const result = await sql`
         INSERT INTO omnostock_leads (name, email, company, website, phone, store_types, created_at)
         VALUES (${validatedData.name}, ${validatedData.email}, ${validatedData.company}, 
-                ${validatedData.website || null}, ${validatedData.phone}, ${storeTypesJson}::jsonb, NOW())
+                ${validatedData.website || null}, ${validatedData.phone}, ${storeTypesText}, NOW())
         RETURNING id, name, email, company, store_types, created_at
       `;
       console.log('Database result:', result);
