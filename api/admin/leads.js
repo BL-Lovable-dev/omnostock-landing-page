@@ -24,7 +24,7 @@ export default async function handler(req, res) {
   try {
     // Fetch all leads from database
     const leads = await sql`
-      SELECT id, name, email, company, website, phone, created_at 
+      SELECT id, name, email, company, website, phone, store_types, created_at 
       FROM omnostock_leads 
       ORDER BY created_at DESC
     `;
@@ -37,6 +37,7 @@ export default async function handler(req, res) {
       company: lead.company,
       website: lead.website,
       phone: lead.phone,
+      storeTypes: lead.store_types || [],
       created_at: lead.created_at
     }));
 

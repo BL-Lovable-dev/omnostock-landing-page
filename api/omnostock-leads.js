@@ -11,6 +11,7 @@ const insertOmnistockLeadSchema = z.object({
   company: z.string().min(1, "Company name is required"),
   website: z.string().optional().or(z.literal("")),
   phone: z.string().min(1, "Phone number is required"),
+  storeTypes: z.array(z.string()).optional().default([])
 });
 
 export default async function handler(req, res) {
@@ -44,10 +45,10 @@ export default async function handler(req, res) {
       
       // Insert lead into database using Neon serverless
       const result = await sql`
-        INSERT INTO omnostock_leads (name, email, company, website, phone, created_at)
+        INSERT INTO omnostock_leads (name, email, company, website, phone, store_types, created_at)
         VALUES (${validatedData.name}, ${validatedData.email}, ${validatedData.company}, 
-                ${validatedData.website || null}, ${validatedData.phone}, NOW())
-        RETURNING id, name, email, company, created_at
+                ${validatedData.website || null}, ${validatedData.phone}, ${validatedData.storeTypes || []}, NOW())
+        RETURNING id, name, email, company, store_types, created_at
       `;
 
       const lead = result[0];

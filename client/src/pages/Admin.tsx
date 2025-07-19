@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Download, Phone, Mail, Globe, Building2, Calendar, Users } from 'lucide-react';
+import { ArrowLeft, Download, Phone, Mail, Globe, Building2, Calendar, Users, ShoppingCart } from 'lucide-react';
 import AdminAuth from './AdminAuth';
 
 interface Lead {
@@ -12,6 +12,7 @@ interface Lead {
   company: string;
   website: string | null;
   phone: string;
+  storeTypes: string[];
   created_at: string;
 }
 
@@ -62,7 +63,7 @@ const Admin = () => {
   };
 
   const exportToCSV = () => {
-    const headers = ['ID', 'Name', 'Email', 'Company', 'Website', 'Phone', 'Date'];
+    const headers = ['ID', 'Name', 'Email', 'Company', 'Website', 'Phone', 'Store Types', 'Date'];
     const csvContent = [
       headers.join(','),
       ...leads.map(lead => [
@@ -72,6 +73,7 @@ const Admin = () => {
         `"${lead.company}"`,
         lead.website || '',
         lead.phone,
+        `"${(lead.storeTypes || []).join('; ')}"`,
         formatDate(lead.created_at)
       ].join(','))
     ].join('\n');
@@ -177,7 +179,7 @@ const Admin = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="pt-4">
-                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                     <div className="flex items-center gap-2">
                       <Mail className="w-4 h-4 text-gray-900" />
                       <a href={`mailto:${lead.email}`} className="text-blue-700 hover:text-blue-900 font-medium underline">
@@ -210,6 +212,26 @@ const Admin = () => {
                       )}
                     </div>
                   </div>
+                  
+                  {/* Store Types Section */}
+                  {lead.storeTypes && lead.storeTypes.length > 0 && (
+                    <div className="border-t border-gray-200 pt-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <ShoppingCart className="w-4 h-4 text-gray-900" />
+                        <span className="text-sm font-semibold text-gray-900">Store Types:</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {lead.storeTypes.map((storeType, index) => (
+                          <Badge 
+                            key={index} 
+                            className="bg-blue-100 text-blue-800 border border-blue-200 text-xs"
+                          >
+                            {storeType}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}

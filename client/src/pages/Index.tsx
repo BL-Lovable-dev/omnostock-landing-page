@@ -4,15 +4,28 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Package, BarChart3, Users, MapPin, Zap, FileText, TrendingUp, Shield, Brain, Cpu, Globe } from 'lucide-react';
+import { CheckCircle, Package, BarChart3, Users, MapPin, Zap, FileText, TrendingUp, Shield, Brain, Cpu, Globe, ShoppingCart } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const Index = () => {
+  // Store types for multi-select checkbox
+  const storeTypes = [
+    'Shopify',
+    'WooCommerce', 
+    'BigCommerce',
+    'Physical Store',
+    'Instagram',
+    'TikTok Shop',
+    'WhatsApp',
+    'Ecommerce Marketplace'
+  ];
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
     website: '',
-    phone: ''
+    phone: '',
+    storeTypes: [] as string[]
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -30,6 +43,29 @@ const Index = () => {
   const [earlyIsSubmitted, setEarlyIsSubmitted] = useState(false);
   const [earlyError, setEarlyError] = useState('');
 
+  // Helper function to process website URL
+  const processWebsiteUrl = (url: string): string => {
+    if (!url) return '';
+    
+    // If already has protocol, return as is
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    
+    // Add https:// prefix for domains
+    return `https://${url}`;
+  };
+
+  // Handle store type checkbox changes
+  const handleStoreTypeChange = (storeType: string, checked: boolean) => {
+    setFormData(prev => {
+      const storeTypes = checked 
+        ? [...prev.storeTypes, storeType]
+        : prev.storeTypes.filter(type => type !== storeType);
+      return { ...prev, storeTypes };
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -45,8 +81,9 @@ const Index = () => {
           name: formData.name,
           email: formData.email,
           company: formData.company,
-          website: formData.website || null,
-          phone: formData.phone
+          website: processWebsiteUrl(formData.website) || null,
+          phone: formData.phone,
+          storeTypes: formData.storeTypes
         })
       });
 
@@ -699,13 +736,14 @@ const Index = () => {
                         <div className="space-y-2">
                           <label className="text-sm font-medium text-gray-300 block">Website URL</label>
                           <Input
-                            type="url"
+                            type="text"
                             name="website"
-                            placeholder="https://yourcompany.com"
+                            placeholder="yourcompany.com or www.yourcompany.com"
                             value={formData.website}
                             onChange={handleChange}
                             className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 h-12 rounded-lg transition-all duration-200 hover:bg-white/15"
                           />
+                          <p className="text-xs text-gray-400">We'll automatically add https:// for you</p>
                         </div>
 
                         <div className="space-y-2">
@@ -719,6 +757,32 @@ const Index = () => {
                             required
                             className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 h-12 rounded-lg transition-all duration-200 hover:bg-white/15"
                           />
+                        </div>
+
+                        <div className="space-y-3">
+                          <label className="text-sm font-medium text-gray-300 block">Current Store Types *</label>
+                          <p className="text-xs text-gray-400">Select all platforms where you currently operate</p>
+                          <div className="grid grid-cols-2 gap-3">
+                            {storeTypes.map((storeType) => (
+                              <div key={storeType} className="flex items-center space-x-2">
+                                <Checkbox
+                                  id={storeType}
+                                  checked={formData.storeTypes.includes(storeType)}
+                                  onCheckedChange={(checked) => handleStoreTypeChange(storeType, checked === true)}
+                                  className="border-white/30 text-blue-400 bg-white/10 focus:ring-2 focus:ring-blue-400"
+                                />
+                                <label 
+                                  htmlFor={storeType} 
+                                  className="text-sm text-gray-300 cursor-pointer flex items-center gap-2"
+                                >
+                                  {storeType === 'Shopify' && <ShoppingCart className="w-4 h-4" />}
+                                  {storeType === 'Physical Store' && <MapPin className="w-4 h-4" />}
+                                  {storeType === 'Instagram' && <Globe className="w-4 h-4" />}
+                                  {storeType}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
                         </div>
 
                         <Button
