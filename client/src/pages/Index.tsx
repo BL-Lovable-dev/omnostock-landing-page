@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, Package, BarChart3, Users, MapPin, Zap, FileText, TrendingUp, Shield, Brain, Cpu, Globe, ShoppingCart } from 'lucide-react';
+import { CheckCircle, Package, BarChart3, Users, MapPin, Zap, FileText, TrendingUp, Shield, Brain, Cpu, Globe, ShoppingCart, Plus } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 
 const Index = () => {
@@ -17,7 +17,8 @@ const Index = () => {
     'Instagram',
     'TikTok Shop',
     'WhatsApp',
-    'Ecommerce Marketplace'
+    'Ecommerce Marketplace',
+    'Other'
   ];
   const [formData, setFormData] = useState({
     name: '',
@@ -25,7 +26,8 @@ const Index = () => {
     company: '',
     website: '',
     phone: '',
-    storeTypes: [] as string[]
+    storeTypes: [] as string[],
+    otherStoreType: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -78,7 +80,9 @@ const Index = () => {
         company: formData.company,
         website: processWebsiteUrl(formData.website) || null,
         phone: formData.phone,
-        storeTypes: formData.storeTypes
+        storeTypes: formData.storeTypes.includes('Other') 
+          ? [...formData.storeTypes.filter(t => t !== 'Other'), `Other: ${formData.otherStoreType}`]
+          : formData.storeTypes
       };
       
       console.log('Frontend sending payload:', payload);
@@ -782,11 +786,28 @@ const Index = () => {
                                   {storeType === 'Shopify' && <ShoppingCart className="w-4 h-4" />}
                                   {storeType === 'Physical Store' && <MapPin className="w-4 h-4" />}
                                   {storeType === 'Instagram' && <Globe className="w-4 h-4" />}
+                                  {storeType === 'Other' && <Plus className="w-4 h-4" />}
                                   {storeType}
                                 </label>
                               </div>
                             ))}
                           </div>
+                          
+                          {/* Other Store Type Input - Shows when "Other" is selected */}
+                          {formData.storeTypes.includes('Other') && (
+                            <div className="mt-4 pl-6 border-l-2 border-blue-400/30">
+                              <label className="text-sm font-medium text-gray-300 block mb-2">
+                                Please specify your other platform:
+                              </label>
+                              <Input
+                                type="text"
+                                placeholder="e.g., Amazon, eBay, Etsy, Facebook Marketplace"
+                                value={formData.otherStoreType}
+                                onChange={(e) => setFormData(prev => ({ ...prev, otherStoreType: e.target.value }))}
+                                className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 h-10 rounded-lg transition-all duration-200 hover:bg-white/15"
+                              />
+                            </div>
+                          )}
                         </div>
 
                         <Button
