@@ -117,6 +117,15 @@ The system is designed to be deployment-flexible, with configurations for variou
 - Added Content-Type headers to ensure proper JSON responses
 - Improved form validation and error messaging
 
+### July 22, 2025 - Source Tracking Implementation
+- Added comprehensive visitor source tracking to capture lead origins
+- Implemented referrer tracking to see which websites send visitors
+- Added UTM parameter capture (utm_source, utm_medium, utm_campaign) for campaign tracking
+- Enhanced admin dashboard with color-coded source tracking badges
+- Updated CSV export to include all source tracking data
+- Fixed Zod validation to properly handle nullable UTM values
+- Database schema expanded with source tracking columns
+
 ### July 19, 2025 - Store Types Feature Complete & UI Improvements
 - Successfully implemented complete store types functionality from form to admin dashboard
 - Fixed critical database schema issue where store_types column was missing from Drizzle schema
