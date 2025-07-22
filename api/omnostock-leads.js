@@ -11,7 +11,11 @@ const insertOmnistockLeadSchema = z.object({
   company: z.string().min(1, "Company name is required"),
   website: z.string().optional().or(z.literal("")),
   phone: z.string().min(1, "Phone number is required"),
-  storeTypes: z.array(z.string()).default([])
+  storeTypes: z.array(z.string()).default([]),
+  source: z.string().nullable().optional(),
+  utmSource: z.string().nullable().optional(),
+  utmMedium: z.string().nullable().optional(),
+  utmCampaign: z.string().nullable().optional(),
 });
 
 export default async function handler(req, res) {
@@ -55,10 +59,12 @@ export default async function handler(req, res) {
       console.log('Store types text:', storeTypesText);
       
       const result = await sql`
-        INSERT INTO omnostock_leads (name, email, company, website, phone, store_types, created_at)
+        INSERT INTO omnostock_leads (name, email, company, website, phone, store_types, source, utm_source, utm_medium, utm_campaign, created_at)
         VALUES (${validatedData.name}, ${validatedData.email}, ${validatedData.company}, 
-                ${validatedData.website || null}, ${validatedData.phone}, ${storeTypesText}, NOW())
-        RETURNING id, name, email, company, store_types, created_at
+                ${validatedData.website || null}, ${validatedData.phone}, ${storeTypesText}, 
+                ${validatedData.source || null}, ${validatedData.utmSource || null}, 
+                ${validatedData.utmMedium || null}, ${validatedData.utmCampaign || null}, NOW())
+        RETURNING id, name, email, company, store_types, source, utm_source, utm_medium, utm_campaign, created_at
       `;
       console.log('Database result:', result);
 

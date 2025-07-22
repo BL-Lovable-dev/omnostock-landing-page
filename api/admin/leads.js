@@ -22,9 +22,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Fetch all leads from database
+    // Fetch all leads from database including source tracking
     const leads = await sql`
-      SELECT id, name, email, company, website, phone, store_types, created_at 
+      SELECT id, name, email, company, website, phone, store_types, source, utm_source, utm_medium, utm_campaign, created_at 
       FROM omnostock_leads 
       ORDER BY created_at DESC
     `;
@@ -38,6 +38,10 @@ export default async function handler(req, res) {
       website: lead.website,
       phone: lead.phone,
       storeTypes: lead.store_types ? lead.store_types.split(', ').filter(s => s.trim()) : [],
+      source: lead.source,
+      utm_source: lead.utm_source,
+      utm_medium: lead.utm_medium,
+      utm_campaign: lead.utm_campaign,
       created_at: lead.created_at
     }));
 
