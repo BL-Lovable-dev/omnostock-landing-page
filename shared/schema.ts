@@ -52,10 +52,10 @@ export const insertOmnistockLeadSchema = z.object({
   website: z.string().optional().or(z.literal("")),
   phone: z.string().min(1, "Phone number is required"),
   storeTypes: z.array(z.string()).default([]).optional(),
-  source: z.string().optional(),
-  utmSource: z.string().optional(),
-  utmMedium: z.string().optional(),
-  utmCampaign: z.string().optional(),
+  source: z.string().nullable().optional(),
+  utmSource: z.string().nullable().optional(),
+  utmMedium: z.string().nullable().optional(),
+  utmCampaign: z.string().nullable().optional(),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
