@@ -74,6 +74,10 @@ const Index = () => {
     setError('');
 
     try {
+      // Capture source tracking data
+      const urlParams = new URLSearchParams(window.location.search);
+      const referrer = document.referrer || 'Direct';
+      
       const payload = {
         name: formData.name,
         email: formData.email,
@@ -82,7 +86,11 @@ const Index = () => {
         phone: formData.phone,
         storeTypes: formData.storeTypes.includes('Other') 
           ? [...formData.storeTypes.filter(t => t !== 'Other'), `Other: ${formData.otherStoreType}`]
-          : formData.storeTypes
+          : formData.storeTypes,
+        source: referrer,
+        utmSource: urlParams.get('utm_source') || null,
+        utmMedium: urlParams.get('utm_medium') || null,
+        utmCampaign: urlParams.get('utm_campaign') || null
       };
       
       console.log('Frontend sending payload:', payload);
@@ -125,6 +133,10 @@ const Index = () => {
     setEarlyError('');
 
     try {
+      // Capture source tracking data for early form too
+      const urlParams = new URLSearchParams(window.location.search);
+      const referrer = document.referrer || 'Direct';
+      
       const response = await fetch('/api/omnostock-leads', {
         method: 'POST',
         headers: {
@@ -135,7 +147,11 @@ const Index = () => {
           email: earlyFormData.email,
           company: earlyFormData.company,
           website: earlyFormData.website || null,
-          phone: earlyFormData.phone
+          phone: earlyFormData.phone,
+          source: referrer,
+          utmSource: urlParams.get('utm_source') || null,
+          utmMedium: urlParams.get('utm_medium') || null,
+          utmCampaign: urlParams.get('utm_campaign') || null
         })
       });
 

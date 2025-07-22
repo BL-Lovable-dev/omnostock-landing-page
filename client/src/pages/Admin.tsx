@@ -63,7 +63,7 @@ const Admin = () => {
   };
 
   const exportToCSV = () => {
-    const headers = ['ID', 'Name', 'Email', 'Company', 'Website', 'Phone', 'Store Types', 'Date'];
+    const headers = ['ID', 'Name', 'Email', 'Company', 'Website', 'Phone', 'Store Types', 'Source', 'UTM Source', 'UTM Medium', 'UTM Campaign', 'Date'];
     const csvContent = [
       headers.join(','),
       ...leads.map(lead => [
@@ -74,6 +74,10 @@ const Admin = () => {
         lead.website || '',
         lead.phone,
         `"${(lead.storeTypes || []).join('; ')}"`,
+        (lead as any).source || '',
+        (lead as any).utm_source || '',
+        (lead as any).utm_medium || '',
+        (lead as any).utm_campaign || '',
         formatDate(lead.created_at)
       ].join(','))
     ].join('\n');
@@ -229,6 +233,54 @@ const Admin = () => {
                             {storeType}
                           </Badge>
                         ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Source Tracking Section */}
+                  {((lead as any).source || (lead as any).utm_source || (lead as any).utm_medium || (lead as any).utm_campaign) && (
+                    <div className="border-t border-gray-200 pt-4 mt-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Globe className="w-4 h-4 text-gray-900" />
+                        <span className="text-sm font-semibold text-gray-900">Traffic Source:</span>
+                      </div>
+                      <div className="space-y-2">
+                        {(lead as any).source && (
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs text-gray-600 font-medium">Referrer:</span>
+                            <Badge className="bg-green-100 text-green-800 border border-green-200 text-xs">
+                              {(lead as any).source}
+                            </Badge>
+                          </div>
+                        )}
+                        {((lead as any).utm_source || (lead as any).utm_medium || (lead as any).utm_campaign) && (
+                          <div className="flex flex-wrap gap-2">
+                            {(lead as any).utm_source && (
+                              <div className="flex items-center gap-1">
+                                <span className="text-xs text-gray-600">Source:</span>
+                                <Badge className="bg-purple-100 text-purple-800 border border-purple-200 text-xs">
+                                  {(lead as any).utm_source}
+                                </Badge>
+                              </div>
+                            )}
+                            {(lead as any).utm_medium && (
+                              <div className="flex items-center gap-1">
+                                <span className="text-xs text-gray-600">Medium:</span>
+                                <Badge className="bg-orange-100 text-orange-800 border border-orange-200 text-xs">
+                                  {(lead as any).utm_medium}
+                                </Badge>
+                              </div>
+                            )}
+                            {(lead as any).utm_campaign && (
+                              <div className="flex items-center gap-1">
+                                <span className="text-xs text-gray-600">Campaign:</span>
+                                <Badge className="bg-pink-100 text-pink-800 border border-pink-200 text-xs">
+                                  {(lead as any).utm_campaign}
+                                </Badge>
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}

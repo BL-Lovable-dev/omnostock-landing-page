@@ -24,6 +24,10 @@ export const omnistockLeads = pgTable("omnostock_leads", {
   website: text("website"),
   phone: text("phone"),
   storeTypes: text("store_types"),
+  source: text("source"), // Where they came from (referrer)
+  utmSource: text("utm_source"), // UTM tracking parameters
+  utmMedium: text("utm_medium"),
+  utmCampaign: text("utm_campaign"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -48,6 +52,10 @@ export const insertOmnistockLeadSchema = z.object({
   website: z.string().optional().or(z.literal("")),
   phone: z.string().min(1, "Phone number is required"),
   storeTypes: z.array(z.string()).default([]).optional(),
+  source: z.string().optional(),
+  utmSource: z.string().optional(),
+  utmMedium: z.string().optional(),
+  utmCampaign: z.string().optional(),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
