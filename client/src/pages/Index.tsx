@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Package, BarChart3, Users, MapPin, Zap, FileText, TrendingUp, Shield, Brain, Cpu, Globe, ShoppingCart, Plus } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
+import { trackEvent } from '@/lib/analytics';
 
 const Index = () => {
   // Store types for multi-select checkbox
@@ -114,6 +115,9 @@ const Index = () => {
         throw new Error(data.message || 'Something went wrong');
       }
 
+      // Track successful form submission
+      trackEvent('form_submit', 'engagement', 'main_contact_form');
+      
       setIsSubmitted(true);
     } catch (error: any) {
       console.error('Form submission error:', error);
@@ -166,6 +170,9 @@ const Index = () => {
         throw new Error(data.message || 'Something went wrong');
       }
 
+      // Track successful early form submission
+      trackEvent('form_submit', 'engagement', 'early_access_form');
+      
       setEarlyIsSubmitted(true);
     } catch (error: any) {
       console.error('Early form submission error:', error);
